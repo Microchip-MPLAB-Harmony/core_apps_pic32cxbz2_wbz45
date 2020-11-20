@@ -3,7 +3,21 @@
 
 # Microchip MPLAB® Harmony 3 Release Notes
 
-## Harmony 3 core library application examples for PIC32CX BZ24/BZ25 family v3.8.0
+## Harmony 3 driver and system service application examples for PIC32CX BZ24/BZ25 family  v3.0.1
+
+### New Features
+- Added discover.microchip.com metadata
+
+### Bug fixes
+- Same as v3.0.0
+
+### Known Issues
+- Same as v3.0.0
+
+### Development Tools
+- Same as v3.0.0
+
+## Harmony 3 core library application examples for PIC32CX BZ24/BZ25 family v3.0.0
 
 ### New Features
 
