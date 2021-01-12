@@ -5,7 +5,7 @@
     Microchip Technology Inc.
 
   File Name:
-    app2.c
+    task1.c
 
   Summary:
     This file contains the source code for the MPLAB Harmony application.
@@ -27,8 +27,9 @@
 // *****************************************************************************
 // *****************************************************************************
 
-#include "app2.h"
-#include "queue.h"
+#include "task1.h"
+#include "definitions.h"
+#include <string.h>
 
 // *****************************************************************************
 // *****************************************************************************
@@ -46,14 +47,15 @@
     This structure holds the application's data.
 
   Remarks:
-    This structure should be initialized by the APP2_Initialize function.
+    This structure should be initialized by the TASK1_Initialize function.
 
     Application strings and buffers are be defined outside this structure.
 */
 
-APP2_DATA app2Data;
-/* The queue used by both tasks. */
-extern QueueHandle_t xQueue;
+TASK1_DATA task1Data;
+
+/* Mutex used to protect the shared resource - UART */
+SemaphoreHandle_t uartMutexLock;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -83,50 +85,58 @@ extern QueueHandle_t xQueue;
 
 /*******************************************************************************
   Function:
-    void APP2_Initialize ( void )
+    void TASK1_Initialize ( void )
 
   Remarks:
-    See prototype in app2.h.
+    See prototype in task1.h.
  */
 
-void APP2_Initialize ( void )
+void TASK1_Initialize ( void )
 {
     /* Place the App state machine in its initial state. */
-    app2Data.state = APP2_STATE_INIT;
+    task1Data.state = TASK1_STATE_INIT;
 
+    /* Create a mutex type semaphore. */
+    uartMutexLock = xSemaphoreCreateMutex();
 
-
-    /* TODO: Initialize your application's state machine and other
-     * parameters.
-     */
+    if( uartMutexLock == NULL)
+    {
+        /* There was insufficient FreeRTOS heap available for the semaphore to
+        be created successfully. */
+        SERCOM1_USART_Write((uint8_t*)"Could not create mutex lock\r\n", strlen("Could not create mutex lock\r\n"));
+    }
 }
-
 
 /******************************************************************************
   Function:
-    void APP2_Tasks ( void )
+    void TASK1_Tasks ( void )
 
   Remarks:
-    See prototype in app2.h.
+    See prototype in task1.h.
  */
 
-void APP2_Tasks ( void )
+void TASK1_Tasks ( void )
 {
-    unsigned long ulReceivedValue = 0;
+    TickType_t timeNow;
 
-    /* Wait until something arrives in the queue - this task will block
-     * indefinitely provided INCLUDE_vTaskSuspend is set to 1 in
-     * FreeRTOSConfig.h.
-     */
-    xQueueReceive( xQueue, &ulReceivedValue, portMAX_DELAY );
-
-    /* To get here something must have been received from the queue, but
-     * is it the expected value?  If it is, toggle the LED.
-     */
-    if( ulReceivedValue == 100UL )
+    while (1)
     {
-        LED_TOGGLE();
-        vTaskDelay((TickType_t)ulReceivedValue);
+        /* Task1 is running (<-) now */
+        xSemaphoreTake(uartMutexLock, portMAX_DELAY);
+        SERCOM1_USART_Write((uint8_t*)"Tsk1-P1 <-\r\n", 12);
+        xSemaphoreGive(uartMutexLock);
+
+        /* Work done by task1 for 100 ticks */
+        timeNow = xTaskGetTickCount();
+        while ((xTaskGetTickCount() - timeNow) < 100);
+
+        /* Task1 is exiting (->) now */
+        xSemaphoreTake(uartMutexLock, portMAX_DELAY);
+        SERCOM1_USART_Write((uint8_t*)"Tsk1-P1 ->\r\n", 12);
+        xSemaphoreGive(uartMutexLock);
+
+        /* Let idle task run for some time*/
+        vTaskDelay(10 / portTICK_PERIOD_MS );
     }
 }
 

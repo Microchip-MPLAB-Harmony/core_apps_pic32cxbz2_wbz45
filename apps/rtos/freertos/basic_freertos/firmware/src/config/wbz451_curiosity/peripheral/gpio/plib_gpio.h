@@ -61,6 +61,16 @@
 // *****************************************************************************
 // *****************************************************************************
 
+/*** Macros for SWITCH pin ***/
+#define SWITCH_Set()               (GPIOB_REGS->GPIO_LATSET = (1<<4))
+#define SWITCH_Clear()             (GPIOB_REGS->GPIO_LATCLR = (1<<4))
+#define SWITCH_Toggle()            (GPIOB_REGS->GPIO_LATINV= (1<<4))
+#define SWITCH_Get()               ((GPIOB_REGS->GPIO_PORT >> 4) & 0x1)
+#define SWITCH_OutputEnable()      (GPIOB_REGS->GPIO_TRISCLR = (1<<4))
+#define SWITCH_InputEnable()       (GPIOB_REGS->GPIO_TRISSET = (1<<4))
+#define SWITCH_InterruptEnable()   (GPIOB_REGS->GPIO_CNENSET = (1<<4))
+#define SWITCH_InterruptDisable()  (GPIOB_REGS->GPIO_CNENCLR = (1<<4))
+#define SWITCH_PIN                  GPIO_PIN_RB4
 
 
 // *****************************************************************************
@@ -141,6 +151,7 @@ typedef enum
 
 } GPIO_PIN;
 
+typedef  void (*GPIO_PIN_CALLBACK) ( GPIO_PIN pin, uintptr_t context);
 
 void GPIO_Initialize(void);
 
@@ -166,6 +177,29 @@ void GPIO_PortInputEnable(GPIO_PORT port, uint32_t mask);
 
 void GPIO_PortOutputEnable(GPIO_PORT port, uint32_t mask);
 
+void GPIO_PortInterruptEnable(GPIO_PORT port, uint32_t mask);
+
+void GPIO_PortInterruptDisable(GPIO_PORT port, uint32_t mask);
+
+// *****************************************************************************
+// *****************************************************************************
+// Section: Local Data types and Prototypes
+// *****************************************************************************
+// *****************************************************************************
+
+typedef struct {
+
+    /* target pin */
+    GPIO_PIN                 pin;
+
+    /* Callback for event on target pin*/
+    GPIO_PIN_CALLBACK        callback;
+
+    /* Callback Context */
+    uintptr_t               context;
+
+} GPIO_PIN_CALLBACK_OBJ;
+
 // *****************************************************************************
 // *****************************************************************************
 // Section: GPIO Functions which operates on one pin at a time
@@ -174,7 +208,7 @@ void GPIO_PortOutputEnable(GPIO_PORT port, uint32_t mask);
 
 static inline void GPIO_PinWrite(GPIO_PIN pin, bool value)
 {
-    GPIO_PortWrite((GPIO_PORT)(GPIOA_BASE_ADDRESS + (0x100 * ((GPIO_PORT)(GPIOA_BASE_ADDRESS + (0x100 * (pin>>4)))))), (uint32_t)(0x1) << (pin & 0xF), (uint32_t)(value) << (pin & 0xF));
+    GPIO_PortWrite((GPIO_PORT)(GPIOA_BASE_ADDRESS + (0x100 * (pin>>4))), (uint32_t)(0x1) << (pin & 0xF), (uint32_t)(value) << (pin & 0xF));
 }
 
 static inline bool GPIO_PinRead(GPIO_PIN pin)
@@ -212,6 +246,21 @@ static inline void GPIO_PinOutputEnable(GPIO_PIN pin)
     GPIO_PortOutputEnable((GPIO_PORT)(GPIOA_BASE_ADDRESS + (0x100 * (pin>>4))), 0x1 << (pin & 0xF));
 }
 
+static inline void GPIO_PinInterruptEnable(GPIO_PIN pin)
+{
+    GPIO_PortInterruptEnable((GPIO_PORT)(GPIOA_BASE_ADDRESS + (0x100 * (pin>>4))), 0x1 << (pin & 0xF));
+}
+
+static inline void GPIO_PinInterruptDisable(GPIO_PIN pin)
+{
+    GPIO_PortInterruptDisable((GPIO_PORT)(GPIOA_BASE_ADDRESS + (0x100 * (pin>>4))), 0x1 << (pin & 0xF));
+}
+
+bool GPIO_PinInterruptCallbackRegister(
+    GPIO_PIN pin,
+    const   GPIO_PIN_CALLBACK callBack,
+    uintptr_t context
+);
 
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility

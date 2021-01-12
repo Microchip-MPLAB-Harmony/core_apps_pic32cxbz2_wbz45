@@ -5,7 +5,7 @@
     Microchip Technology Inc.
 
   File Name:
-    app2.h
+    task2.h
 
   Summary:
     This header file provides prototypes and definitions for the application.
@@ -13,13 +13,13 @@
   Description:
     This header file provides function prototypes and data type definitions for
     the application.  Some of these are required by the system (such as the
-    "APP2_Initialize" and "APP2_Tasks" prototypes) and some of them are only used
-    internally by the application (such as the "APP2_STATES" definition).  Both
+    "TASK2_Initialize" and "TASK2_Tasks" prototypes) and some of them are only used
+    internally by the application (such as the "TASK2_STATES" definition).  Both
     are defined here for convenience.
 *******************************************************************************/
 
-#ifndef _APP2_H
-#define _APP2_H
+#ifndef _TASK2_H
+#define _TASK2_H
 
 // *****************************************************************************
 // *****************************************************************************
@@ -32,10 +32,6 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include "configuration.h"
-#include "FreeRTOS.h"
-#include "task.h"
-#include "queue.h"
-#include "osal/osal.h"
 
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
@@ -65,11 +61,11 @@ extern "C" {
 typedef enum
 {
     /* Application's state machine's initial state. */
-    APP2_STATE_INIT=0,
-
+    TASK2_STATE_INIT=0,
+    TASK2_STATE_SERVICE_TASKS,
     /* TODO: Define states used by the application state machine. */
 
-} APP2_STATES;
+} TASK2_STATES;
 
 
 // *****************************************************************************
@@ -88,12 +84,11 @@ typedef enum
 typedef struct
 {
     /* The application's current state */
-    APP2_STATES state;
+    TASK2_STATES state;
 
     /* TODO: Define any additional data used by the application. */
 
-} APP2_DATA;
-
+} TASK2_DATA;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -111,7 +106,7 @@ typedef struct
 
 /*******************************************************************************
   Function:
-    void APP2_Initialize ( void )
+    void TASK2_Initialize ( void )
 
   Summary:
      MPLAB Harmony application initialization routine.
@@ -119,7 +114,7 @@ typedef struct
   Description:
     This function initializes the Harmony application.  It places the
     application in its initial state and prepares it to run so that its
-    APP_Tasks function can be called.
+    TASK2_Tasks function can be called.
 
   Precondition:
     All other system initialization routines should be called before calling
@@ -133,19 +128,19 @@ typedef struct
 
   Example:
     <code>
-    APP2_Initialize();
+    TASK2_Initialize();
     </code>
 
   Remarks:
     This routine must be called from the SYS_Initialize function.
 */
 
-void APP2_Initialize ( void );
+void TASK2_Initialize ( void );
 
 
 /*******************************************************************************
   Function:
-    void APP2_Tasks ( void )
+    void TASK2_Tasks ( void )
 
   Summary:
     MPLAB Harmony Demo application tasks function
@@ -166,24 +161,22 @@ void APP2_Initialize ( void );
 
   Example:
     <code>
-    APP2_Tasks();
+    TASK2_Tasks();
     </code>
 
   Remarks:
     This routine must be called from SYS_Tasks() routine.
  */
 
-void APP2_Tasks( void );
-
-
-
-#endif /* _APP2_H */
+void TASK2_Tasks( void );
 
 //DOM-IGNORE-BEGIN
 #ifdef __cplusplus
 }
 #endif
 //DOM-IGNORE-END
+
+#endif /* _TASK2_H */
 
 /*******************************************************************************
  End of File

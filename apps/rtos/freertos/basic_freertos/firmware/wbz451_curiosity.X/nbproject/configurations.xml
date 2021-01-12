@@ -33,6 +33,12 @@
             <logicalFolder name="f6" displayName="nvm" projectFiles="true">
               <itemPath>../src/config/wbz451_curiosity/peripheral/nvm/plib_nvm.h</itemPath>
             </logicalFolder>
+            <logicalFolder name="f7" displayName="sercom" projectFiles="true">
+              <logicalFolder name="f1" displayName="usart" projectFiles="true">
+                <itemPath>../src/config/wbz451_curiosity/peripheral/sercom/usart/plib_sercom1_usart.h</itemPath>
+                <itemPath>../src/config/wbz451_curiosity/peripheral/sercom/usart/plib_sercom_usart_common.h</itemPath>
+              </logicalFolder>
+            </logicalFolder>
           </logicalFolder>
           <itemPath>../src/config/wbz451_curiosity/device.h</itemPath>
           <itemPath>../src/config/wbz451_curiosity/device_cache.h</itemPath>
@@ -41,6 +47,8 @@
           <itemPath>../src/config/wbz451_curiosity/FreeRTOSConfig.h</itemPath>
           <itemPath>../src/config/wbz451_curiosity/user.h</itemPath>
           <itemPath>../src/config/wbz451_curiosity/configuration.h</itemPath>
+          <itemPath>../src/config/wbz451_curiosity/interrupts.h</itemPath>
+          <itemPath>../src/config/wbz451_curiosity/device_vectors.h</itemPath>
         </logicalFolder>
       </logicalFolder>
       <logicalFolder name="f3" displayName="FreeRTOS" projectFiles="true">
@@ -141,9 +149,10 @@
           <itemPath>../src/packs/PIC32CX1012BZ25048_DFP/pic32cx1012bz25048.h</itemPath>
         </logicalFolder>
       </logicalFolder>
-      <itemPath>../src/app.h</itemPath>
-      <itemPath>../src/app1.h</itemPath>
-      <itemPath>../src/app2.h</itemPath>
+      <itemPath>../src/task1.h</itemPath>
+      <itemPath>../src/task2.h</itemPath>
+      <itemPath>../src/task3.h</itemPath>
+      <itemPath>../src/task4.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -184,6 +193,11 @@
             <logicalFolder name="f6" displayName="nvm" projectFiles="true">
               <itemPath>../src/config/wbz451_curiosity/peripheral/nvm/plib_nvm.c</itemPath>
             </logicalFolder>
+            <logicalFolder name="f7" displayName="sercom" projectFiles="true">
+              <logicalFolder name="f1" displayName="usart" projectFiles="true">
+                <itemPath>../src/config/wbz451_curiosity/peripheral/sercom/usart/plib_sercom1_usart.c</itemPath>
+              </logicalFolder>
+            </logicalFolder>
           </logicalFolder>
           <logicalFolder name="f3" displayName="stdio" projectFiles="true">
             <itemPath>../src/config/wbz451_curiosity/stdio/xc32_monitor.c</itemPath>
@@ -221,16 +235,30 @@
         </logicalFolder>
       </logicalFolder>
       <itemPath>../src/main.c</itemPath>
-      <itemPath>../src/app.c</itemPath>
-      <itemPath>../src/app1.c</itemPath>
-      <itemPath>../src/app2.c</itemPath>
+      <itemPath>../src/task1.c</itemPath>
+      <itemPath>../src/task2.c</itemPath>
+      <itemPath>../src/task3.c</itemPath>
+      <itemPath>../src/task4.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
                    projectFiles="false">
+      <logicalFolder name="f1" displayName="wbz451_curiosity.mhc" projectFiles="true">
+        <itemPath>../src/config/wbz451_curiosity/wbz451_curiosity.mhc/BSP_PIC32CX_WBZ451_Curiosity.yml</itemPath>
+        <itemPath>../src/config/wbz451_curiosity/wbz451_curiosity.mhc/cmsis.yml</itemPath>
+        <itemPath>../src/config/wbz451_curiosity/wbz451_curiosity.mhc/core.yml</itemPath>
+        <itemPath>../src/config/wbz451_curiosity/wbz451_curiosity.mhc/dfp.yml</itemPath>
+        <itemPath>../src/config/wbz451_curiosity/wbz451_curiosity.mhc/evsys.yml</itemPath>
+        <itemPath>../src/config/wbz451_curiosity/wbz451_curiosity.mhc/FreeRTOS.yml</itemPath>
+        <itemPath>../src/config/wbz451_curiosity/wbz451_curiosity.mhc/GraphSettings.yml</itemPath>
+        <itemPath>../src/config/wbz451_curiosity/wbz451_curiosity.mhc/HarmonyCore.yml</itemPath>
+        <itemPath>../src/config/wbz451_curiosity/wbz451_curiosity.mhc/nvm.yml</itemPath>
+        <itemPath>../src/config/wbz451_curiosity/wbz451_curiosity.mhc/project.yml</itemPath>
+        <itemPath>../src/config/wbz451_curiosity/wbz451_curiosity.mhc/sercom1.yml</itemPath>
+        <itemPath>../src/config/wbz451_curiosity/wbz451_curiosity.mhc/settings.yml</itemPath>
+      </logicalFolder>
       <itemPath>Makefile</itemPath>
-      <itemPath>../src/config/wbz451_curiosity/harmony.prj</itemPath>
-      <itemPath>../src/config/wbz451_curiosity/wbz451_curiosity.xml</itemPath>
+      <itemPath>../src/config/wbz451_curiosity/harmony-manifest-success.yml</itemPath>
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
@@ -251,7 +279,7 @@
       </toolsSet>
       <packs>
         <pack name="CMSIS" vendor="ARM" version="5.4.0"/>
-        <pack name="PIC32CX-BZ_DFP" vendor="Microchip" version="1.0.54"/>
+        <pack name="PIC32CX-BZ_DFP" vendor="Microchip" version="1.0.55"/>
       </packs>
       <ScriptingSettings>
       </ScriptingSettings>
@@ -1008,7 +1036,6 @@
         <property key="programoptions.programcalmem" value="false"/>
         <property key="programoptions.programuserotp" value="false"/>
         <property key="programoptions.testmodeentrymethod" value="VDDFirst"/>
-        <property key="programoptionsedbg.eraseb4program" value="true"/>
         <property key="toolpack.updateoptions"
                   value="toolpack.updateoptions.uselatestoolpack"/>
         <property key="toolpack.updateoptions.packversion"

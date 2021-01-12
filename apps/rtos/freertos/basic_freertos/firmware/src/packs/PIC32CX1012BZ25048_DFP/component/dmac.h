@@ -20,7 +20,7 @@
  *
  */
 
-/* file generated from device description version 2020-09-18T17:59:35Z */
+/* file generated from device description version 2020-10-08T21:33:55Z */
 #ifndef _BZ25_DMAC_COMPONENT_H_
 #define _BZ25_DMAC_COMPONENT_H_
 

@@ -5,7 +5,7 @@
     Microchip Technology Inc.
 
   File Name:
-    app.h
+    task4.h
 
   Summary:
     This header file provides prototypes and definitions for the application.
@@ -13,13 +13,13 @@
   Description:
     This header file provides function prototypes and data type definitions for
     the application.  Some of these are required by the system (such as the
-    "APP_Initialize" and "APP_Tasks" prototypes) and some of them are only used
-    internally by the application (such as the "APP_STATES" definition).  Both
+    "TASK4_Initialize" and "TASK4_Tasks" prototypes) and some of them are only used
+    internally by the application (such as the "TASK4_STATES" definition).  Both
     are defined here for convenience.
 *******************************************************************************/
 
-#ifndef _APP_H
-#define _APP_H
+#ifndef _TASK4_H
+#define _TASK4_H
 
 // *****************************************************************************
 // *****************************************************************************
@@ -32,19 +32,6 @@
 #include <stddef.h>
 #include <stdlib.h>
 #include "configuration.h"
-#include "FreeRTOS.h"
-#include "task.h"
-#include "queue.h"
-#include "osal/osal.h"
-
-/* The number of items the queue can hold.  This is 1 as the receive task
-will remove items as they are added, meaning the send task should always find
-the queue empty. */
-#define  QUEUE_LENGTH                    ( 1 )
-
-/* The rate at which data is sent to the queue.  The 200ms value is converted
-to ticks using the portTICK_RATE_MS constant. */
-#define  QUEUE_SEND_FREQUENCY_MS         ( 200 / portTICK_PERIOD_MS )
 
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
@@ -61,7 +48,7 @@ extern "C" {
 // *****************************************************************************
 
 // *****************************************************************************
-/* Application States
+/* Application states
 
   Summary:
     Application states enumeration
@@ -74,11 +61,11 @@ extern "C" {
 typedef enum
 {
     /* Application's state machine's initial state. */
-    APP_STATE_INIT = 0,
-
+    TASK4_STATE_INIT=0,
+    TASK4_STATE_SERVICE_TASKS,
     /* TODO: Define states used by the application state machine. */
 
-} APP_STATES;
+} TASK4_STATES;
 
 
 // *****************************************************************************
@@ -97,14 +84,11 @@ typedef enum
 typedef struct
 {
     /* The application's current state */
-    APP_STATES state;
-
-    unsigned long ulValueToSend1;
-    unsigned long ulValueToSend2;
+    TASK4_STATES state;
 
     /* TODO: Define any additional data used by the application. */
-} APP_DATA;
 
+} TASK4_DATA;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -122,7 +106,7 @@ typedef struct
 
 /*******************************************************************************
   Function:
-    void APP_Initialize ( void )
+    void TASK4_Initialize ( void )
 
   Summary:
      MPLAB Harmony application initialization routine.
@@ -130,7 +114,7 @@ typedef struct
   Description:
     This function initializes the Harmony application.  It places the
     application in its initial state and prepares it to run so that its
-    APP_Tasks function can be called.
+    TASK4_Tasks function can be called.
 
   Precondition:
     All other system initialization routines should be called before calling
@@ -144,19 +128,19 @@ typedef struct
 
   Example:
     <code>
-    APP_Initialize();
+    TASK4_Initialize();
     </code>
 
   Remarks:
     This routine must be called from the SYS_Initialize function.
 */
 
-void APP_Initialize ( void );
+void TASK4_Initialize ( void );
 
 
 /*******************************************************************************
   Function:
-    void APP_Tasks ( void )
+    void TASK4_Tasks ( void )
 
   Summary:
     MPLAB Harmony Demo application tasks function
@@ -177,24 +161,22 @@ void APP_Initialize ( void );
 
   Example:
     <code>
-    APP_Tasks();
+    TASK4_Tasks();
     </code>
 
   Remarks:
     This routine must be called from SYS_Tasks() routine.
  */
 
-void APP_Tasks( void );
-
-
-
-#endif /* _APP_H */
+void TASK4_Tasks( void );
 
 //DOM-IGNORE-BEGIN
 #ifdef __cplusplus
 }
 #endif
 //DOM-IGNORE-END
+
+#endif /* _TASK4_H */
 
 /*******************************************************************************
  End of File

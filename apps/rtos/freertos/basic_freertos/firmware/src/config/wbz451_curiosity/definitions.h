@@ -49,6 +49,7 @@
 #include <stddef.h>
 #include <stdbool.h>
 #include "bsp/bsp.h"
+#include "peripheral/sercom/usart/plib_sercom1_usart.h"
 #include "peripheral/evsys/plib_evsys.h"
 #include "peripheral/clk/plib_clk.h"
 #include "peripheral/gpio/plib_gpio.h"
@@ -56,11 +57,12 @@
 #include "peripheral/cmcc/plib_cmcc.h"
 #include "FreeRTOS.h"
 #include "task.h"
-#include "peripheral/nvm/plib_nvm.h"
 #include "osal/osal.h"
-#include "app.h"
-#include "app1.h"
-#include "app2.h"
+#include "peripheral/nvm/plib_nvm.h"
+#include "task1.h"
+#include "task2.h"
+#include "task3.h"
+#include "task4.h"
 
 
 
@@ -71,6 +73,9 @@ extern "C" {
 
 #endif
 // DOM-IGNORE-END
+
+/* CPU clock frequency */
+#define CPU_CLOCK_FREQUENCY 64000000
 
 // *****************************************************************************
 // *****************************************************************************

@@ -5,7 +5,7 @@
     Microchip Technology Inc.
 
   File Name:
-    app1.c
+    task2.c
 
   Summary:
     This file contains the source code for the MPLAB Harmony application.
@@ -27,9 +27,9 @@
 // *****************************************************************************
 // *****************************************************************************
 
-#include "app1.h"
-#include "queue.h"
-
+#include "task2.h"
+#include "definitions.h"
+#include <string.h>
 // *****************************************************************************
 // *****************************************************************************
 // Section: Global Data Definitions
@@ -46,13 +46,13 @@
     This structure holds the application's data.
 
   Remarks:
-    This structure should be initialized by the APP1_Initialize function.
+    This structure should be initialized by the TASK2_Initialize function.
 
     Application strings and buffers are be defined outside this structure.
 */
 
-APP1_DATA app1Data;
-extern QueueHandle_t xQueue;
+TASK2_DATA task2Data;
+extern SemaphoreHandle_t uartMutexLock;
 
 // *****************************************************************************
 // *****************************************************************************
@@ -82,16 +82,16 @@ extern QueueHandle_t xQueue;
 
 /*******************************************************************************
   Function:
-    void APP1_Initialize ( void )
+    void TASK2_Initialize ( void )
 
   Remarks:
-    See prototype in app1.h.
+    See prototype in task2.h.
  */
 
-void APP1_Initialize ( void )
+void TASK2_Initialize ( void )
 {
-    /* Place the App1 state machine in its initial state. */
-    app1Data.state = APP1_STATE_INIT;
+    /* Place the App state machine in its initial state. */
+    task2Data.state = TASK2_STATE_INIT;
 
 
 
@@ -103,31 +103,35 @@ void APP1_Initialize ( void )
 
 /******************************************************************************
   Function:
-    void APP1_Tasks ( void )
+    void TASK2_Tasks ( void )
 
   Remarks:
-    See prototype in app1.h.
+    See prototype in task2.h.
  */
 
-void APP1_Tasks ( void )
+void TASK2_Tasks ( void )
 {
-    unsigned long ulReceivedValue = 0;
-
-    /* Wait until something arrives in the queue - this task will block
-     * indefinitely provided INCLUDE_vTaskSuspend is set to 1 in
-     * FreeRTOSConfig.h.
-     */
-    xQueueReceive( xQueue, &ulReceivedValue, portMAX_DELAY );
-
-    /* To get here something must have been received from the queue, but
-     * is it the expected value?  If it is, toggle the LED.
-     */
-    if( ulReceivedValue == 1000UL )
-    {
-        LED_TOGGLE();
-        vTaskDelay((TickType_t)ulReceivedValue);
+    TickType_t timeNow;
+    
+    while (1)
+    {        
+        /* Task2 is running (<-) now */
+        xSemaphoreTake(uartMutexLock, portMAX_DELAY);        
+        SERCOM1_USART_Write((uint8_t*)"           Tsk2-P2 <-\r\n", 23);
+        xSemaphoreGive(uartMutexLock); 
+        
+        /* Work done by task2 for 10 ticks */
+        timeNow = xTaskGetTickCount();
+        while ((xTaskGetTickCount() - timeNow) < 10);
+        
+        /* Task2 is exiting (->) now */
+        xSemaphoreTake(uartMutexLock, portMAX_DELAY);        
+        SERCOM1_USART_Write((uint8_t*)"           Tsk2-P2 ->\r\n", 23);
+        xSemaphoreGive(uartMutexLock);   
+        
+        /* Run the task again after 250 msec */
+        vTaskDelay(250 / portTICK_PERIOD_MS );        
     }
-
 }
 
 

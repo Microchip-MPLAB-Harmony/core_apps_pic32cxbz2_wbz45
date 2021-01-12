@@ -20,7 +20,7 @@
  *
  */
 
-/* file generated from device description version 2020-09-18T17:59:35Z */
+/* file generated from device description version 2020-10-08T21:33:55Z */
 #ifndef _PIC32CX1012BZ25048_H_
 #define _PIC32CX1012BZ25048_H_
 
@@ -30,12 +30,12 @@
 #define HEADER_FORMAT_VERSION_MAJOR (2)
 #define HEADER_FORMAT_VERSION_MINOR (0)
 
-/** \addtogroup PIC32CX1012BZ25048_definitions b'PIC32CX1012BZ25048 definitions
+/** \addtogroup PIC32CX1012BZ25048_definitions PIC32CX1012BZ25048 definitions
   This file defines all structures and symbols for PIC32CX1012BZ25048:
     - registers and bitfields
     - peripheral base address
     - peripheral ID
-    - PIO definitions'
+    - PIO definitions
  *  @{
  */
 
@@ -65,7 +65,7 @@
 #  define _UL_(x) x   /**< Assembler: Unsigned Long integer literal constant value */
 #endif /* !(defined(__ASSEMBLER__) || defined(__IAR_SYSTEMS_ASM__)) */
 #endif /* SKIP_INTEGER_LITERALS */
-/** @}  b'end of Atmel Global Defines' */
+/** @}  end of Atmel Global Defines */
 
 /* ************************************************************************** */
 /*   CMSIS DEFINITIONS FOR PIC32CX1012BZ25048                                 */
@@ -277,7 +277,7 @@ void BT_RC_Handler                 ( void );
 #include "system_bz25.h"
 #endif /* USE_CMSIS_INIT */
 
-/** \defgroup PIC32CX1012BZ25048_api b'Peripheral Software API'
+/** \defgroup PIC32CX1012BZ25048_api Peripheral Software API
  *  @{
  */
 
@@ -321,9 +321,9 @@ void BT_RC_Handler                 ( void );
 #include "component/trng.h"
 #include "component/wdt.h"
 #include "component/zigbee.h"
-/** @}  b'end of Peripheral Software API' */
+/** @}  end of Peripheral Software API */
 
-/** \addtogroup PIC32CX1012BZ25048_id b'Peripheral Ids Definitions'
+/** \addtogroup PIC32CX1012BZ25048_id Peripheral Ids Definitions
  *  @{
  */
 
@@ -361,9 +361,9 @@ void BT_RC_Handler                 ( void );
 #define ID_DSCON         ( 79) /**< \brief  (DSCON) */
 
 #define ID_PERIPH_MAX    ( 79) /**< \brief Number of peripheral IDs */
-/** @}  b'end of Peripheral Ids Definitions' */
+/** @}  end of Peripheral Ids Definitions */
 
-/** \addtogroup PIC32CX1012BZ25048_base b'Peripheral Base Address Definitions'
+/** \addtogroup PIC32CX1012BZ25048_base Peripheral Base Address Definitions
  *  @{
  */
 
@@ -417,9 +417,9 @@ void BT_RC_Handler                 ( void );
 #define ZIGBEE_REGS                      ((zigbee_registers_t*)0x41010000)             /**< \brief ZIGBEE Registers Address     */
 #define ARB_REGS                         ((arb_registers_t*)0x41011000)                /**< \brief ARB Registers Address        */
 #endif /* (defined(__ASSEMBLER__) || defined(__IAR_SYSTEMS_ASM__)) */
-/** @}  b'end of Peripheral Base Address Definitions' */
+/** @}  end of Peripheral Base Address Definitions */
 
-/** \addtogroup PIC32CX1012BZ25048_base b'Peripheral Base Address Definitions'
+/** \addtogroup PIC32CX1012BZ25048_base Peripheral Base Address Definitions
  *  @{
  */
 
@@ -471,9 +471,9 @@ void BT_RC_Handler                 ( void );
 #define WDT_BASE_ADDRESS                 _UL_(0x44000500)                              /**< \brief WDT Base Address */
 #define ZIGBEE_BASE_ADDRESS              _UL_(0x41010000)                              /**< \brief ZIGBEE Base Address */
 #define ARB_BASE_ADDRESS                 _UL_(0x41011000)                              /**< \brief ARB Base Address */
-/** @}  b'end of Peripheral Base Address Definitions' */
+/** @}  end of Peripheral Base Address Definitions */
 
-/** \addtogroup PIC32CX1012BZ25048_pio b'Peripheral Pio Definitions'
+/** \addtogroup PIC32CX1012BZ25048_pio Peripheral Pio Definitions
  *  @{
  */
 
@@ -481,7 +481,7 @@ void BT_RC_Handler                 ( void );
 /*   PIO DEFINITIONS FOR PIC32CX1012BZ25048                                   */
 /* ************************************************************************** */
 #include "pio/pic32cx1012bz25048.h"
-/** @}  b'end of Peripheral Pio Definitions' */
+/** @}  end of Peripheral Pio Definitions */
 
 /* ************************************************************************** */
 /*   MEMORY MAPPING DEFINITIONS FOR PIC32CX1012BZ25048                        */
@@ -667,7 +667,7 @@ void BT_RC_Handler                 ( void );
 }
 #endif
 
-/** @}  b'end of PIC32CX1012BZ25048 definitions' */
+/** @}  end of PIC32CX1012BZ25048 definitions */
 
 
 #endif /* _PIC32CX1012BZ25048_H_ */

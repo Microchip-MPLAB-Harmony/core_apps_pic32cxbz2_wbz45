@@ -20,7 +20,7 @@
  *
  */
 
-/* file generated from device description version 2020-09-18T17:59:35Z */
+/* file generated from device description version 2020-10-08T21:33:55Z */
 #ifndef _PIC32CX1012BZ25048_GPIO_H_
 #define _PIC32CX1012BZ25048_GPIO_H_
 
