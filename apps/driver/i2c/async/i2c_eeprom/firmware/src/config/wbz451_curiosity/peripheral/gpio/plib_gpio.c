@@ -57,11 +57,12 @@
 */
 void GPIO_Initialize ( void )
 {
+ 
     /* PORTA Initialization */
     /* PORTB Initialization */
     GPIOB_REGS->GPIO_LAT = 0x0; /* Initial Latch Value */
-    GPIOB_REGS->GPIO_TRISCLR = 0x29; /* Direction Control */
-    GPIOB_REGS->GPIO_ANSELCLR = 0x39; /* Digital Mode Enable */
+    GPIOB_REGS->GPIO_TRISCLR = 0xa9; /* Direction Control */
+    GPIOB_REGS->GPIO_ANSELCLR = 0xb9; /* Digital Mode Enable */
     GPIOB_REGS->GPIO_CNPUSET = 0x10; /* Pull-Up Enable */
 
 

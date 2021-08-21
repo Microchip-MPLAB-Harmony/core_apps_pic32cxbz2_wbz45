@@ -75,6 +75,11 @@
 #define RGB_LED_BLUE_Get() ((GPIOB_REGS->GPIO_PORT >> 5) & 0x1)
 #define RGB_LED_BLUE_On() (GPIOB_REGS->GPIO_LATSET = (1<<5))
 #define RGB_LED_BLUE_Off() (GPIOB_REGS->GPIO_LATCLR = (1<<5))
+/*** LED Macros for USER_LED ***/
+#define USER_LED_Toggle() (GPIOB_REGS->GPIO_LATINV = (1<<7))
+#define USER_LED_Get() ((GPIOB_REGS->GPIO_PORT >> 7) & 0x1)
+#define USER_LED_On() (GPIOB_REGS->GPIO_LATSET = (1<<7))
+#define USER_LED_Off() (GPIOB_REGS->GPIO_LATCLR = (1<<7))
 /*** SWITCH Macros for SWITCH ***/
 #define SWITCH_Get() ((GPIOB_REGS->GPIO_PORT >> 4) & 0x1)
 #define SWITCH_STATE_PRESSED 0

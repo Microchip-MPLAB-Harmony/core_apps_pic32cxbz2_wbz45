@@ -56,7 +56,7 @@
 */
 
 #include "user.h"
-#include "toolchain_specifics.h"
+#include "device.h"
 
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
@@ -90,7 +90,7 @@ extern "C" {
 #define DRV_I2C_INDEX_0                       0
 #define DRV_I2C_CLIENTS_NUMBER_IDX0           1
 #define DRV_I2C_QUEUE_SIZE_IDX0               2
-#define DRV_I2C_CLOCK_SPEED_IDX0              400
+#define DRV_I2C_CLOCK_SPEED_IDX0              100
 
 /* I2C Driver Common Configuration Options */
 #define DRV_I2C_INSTANCES_NUMBER              1
