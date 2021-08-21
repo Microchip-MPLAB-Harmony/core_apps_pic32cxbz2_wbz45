@@ -1,0 +1,14 @@
+configName: wbz451_curiosity
+folderName: wbz451_curiosity
+format_version: v1.0
+frameworkPath: ..\..\..\..\..\..\..\h3
+processor: WBZ451
+projectName: spi_self_loopback_multi_client_wbz451_curiosity
+settings:
+  PackageFilter: bootloader;bootloader_apps_i2c;bootloader_apps_usb;bsp;core;crypto;crypto_apps_encrypt_decrypt;csp;csp_apps_pic32mk;quick_docs;usb
+  FORCE_OPTIMIZATION: 'false'
+  GENERATE_BACKUP: 'true'
+  TRUSTZONE: 'false'
+  CMSISPath: .\dev_packs\arm\CMSIS\5.8.0
+  MERGE_STRATEGY: USER_ALL
+  DFPPath: .\dev_packs\Microchip\PIC32CX-BZ_DFP\1.0.80\WBZ451\atdf\WBZ451.atdf

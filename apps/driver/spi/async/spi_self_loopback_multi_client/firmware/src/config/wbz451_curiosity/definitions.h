@@ -48,21 +48,19 @@
 #include <stdint.h>
 #include <stddef.h>
 #include <stdbool.h>
-#include "bsp/bsp.h"
 #include "peripheral/evsys/plib_evsys.h"
 #include "peripheral/sercom/spi_master/plib_sercom0_spi_master.h"
 #include "peripheral/clk/plib_clk.h"
 #include "peripheral/gpio/plib_gpio.h"
 #include "peripheral/nvic/plib_nvic.h"
 #include "peripheral/cmcc/plib_cmcc.h"
+#include "bsp/bsp.h"
 #include "driver/spi/drv_spi.h"
 #include "system/int/sys_int.h"
 #include "system/ports/sys_ports.h"
 #include "system/cache/sys_cache.h"
-#include "system/dma/sys_dma.h"
 #include "osal/osal.h"
 #include "system/debug/sys_debug.h"
-#include "peripheral/nvm/plib_nvm.h"
 #include "app_monitor.h"
 #include "app_client1.h"
 #include "app_client2.h"
@@ -76,6 +74,9 @@ extern "C" {
 
 #endif
 // DOM-IGNORE-END
+
+/* CPU clock frequency */
+#define CPU_CLOCK_FREQUENCY 64000000
 
 // *****************************************************************************
 // *****************************************************************************
@@ -169,22 +170,22 @@ void SYS_Tasks ( void );
 // Section: Type Definitions
 // *****************************************************************************
 // *****************************************************************************
-    
+
 // *****************************************************************************
 /* System Objects
-        
+
 Summary:
     Structure holding the system's object handles
-        
+
 Description:
     This structure contains the object handles for all objects in the
     MPLAB Harmony project's system configuration.
-        
+
 Remarks:
     These handles are returned from the "Initialize" functions for each module
     and must be passed into the "Tasks" function for each module.
 */
-        
+
 typedef struct
 {
     /* SPI0 Driver Object */

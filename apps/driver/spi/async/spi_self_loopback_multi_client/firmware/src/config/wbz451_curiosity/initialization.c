@@ -62,17 +62,11 @@
 #pragma config TDOEN =      ON
 #pragma config SWOEN =      ON
 #pragma config TROEN =      OFF
-#pragma config JTAGEN =      ON
 #pragma config ADCPOVR =      HW
 #pragma config ACCMP1_ALTEN =      PA1
 #pragma config CPENFILT =      OFF
 #pragma config RTCIN0_ALTEN =      PA3
 #pragma config RTCOUT_ALTEN =      PA4
-#pragma config PMULOCK =      OFF
-#pragma config PGLOCK =      OFF
-#pragma config PMDLOCK =      OFF
-#pragma config IOLOCK =      UNLOCKED
-#pragma config CFGLOCK =      NVR_NOT_LOCKED
 #pragma config VBCMODE =      DIRECT
 #pragma config SMBUSEN0 =      OFF
 #pragma config SMBUSEN1 =      OFF
@@ -89,7 +83,6 @@
 
 
 /*** DEVCFG1 ***/
-#pragma config DEBUG =      3
 #pragma config ICESEL =      PGC1_PGD1
 #pragma config TRCEN =      ON
 #pragma config ZBTWKSYS =      OFF
@@ -112,7 +105,6 @@
 #pragma config WDTPSS =      PSS1048576
 #pragma config QSPIDDRM =      OFF
 #pragma config CLKZBREF =      OFF
-#pragma config FMPDAEN =      OFF
 
 /*** DEVCFG2 ***/
 #pragma config ACMP_CYCLE =      _32US
@@ -185,7 +177,7 @@ const DRV_SPI_PLIB_INTERFACE drvSPI0PlibAPI = {
     .writeRead = (DRV_SPI_PLIB_WRITE_READ)SERCOM0_SPI_WriteRead,
 
     /* SPI PLIB Transfer Status function */
-    .isBusy = (DRV_SPI_PLIB_IS_BUSY)SERCOM0_SPI_IsBusy,
+    .isTransmitterBusy = (DRV_SPI_PLIB_TRANSMITTER_IS_BUSY)SERCOM0_SPI_IsTransmitterBusy,
 
     /* SPI PLIB Callback Register */
     .callbackRegister = (DRV_SPI_PLIB_CALLBACK_REGISTER)SERCOM0_SPI_CallbackRegister,
@@ -222,11 +214,6 @@ const DRV_SPI_INIT drvSPI0InitData =
     /* SPI Client Objects Pool */
     .clientObjPool = (uintptr_t)&drvSPI0ClientObjPool[0],
 
-    /* DMA Channel for Transmit */
-    .dmaChannelTransmit = SYS_DMA_CHANNEL_NONE,
-
-    /* DMA Channel for Receive */
-    .dmaChannelReceive  = SYS_DMA_CHANNEL_NONE,
 
     /* SPI Queue Size */
     .transferObjPoolSize = DRV_SPI_QUEUE_SIZE_IDX0,
@@ -284,6 +271,7 @@ SYSTEM_OBJECTS sysObj;
 
 void SYS_Initialize ( void* data )
 {
+
   
     CLK_Initialize();
     /* Configure Prefetch, Wait States */
@@ -293,13 +281,11 @@ void SYS_Initialize ( void* data )
 
 	GPIO_Initialize();
 
-	BSP_Initialize();
     EVSYS_Initialize();
 
     SERCOM0_SPI_Initialize();
 
-    NVM_Initialize();
-
+	BSP_Initialize();
 
     /* Initialize SPI0 Driver Instance */
     sysObj.drvSPI0 = DRV_SPI_Initialize(DRV_SPI_INDEX_0, (SYS_MODULE_INIT *)&drvSPI0InitData);
