@@ -62,17 +62,11 @@
 #pragma config TDOEN =      ON
 #pragma config SWOEN =      ON
 #pragma config TROEN =      OFF
-#pragma config JTAGEN =      ON
 #pragma config ADCPOVR =      HW
 #pragma config ACCMP1_ALTEN =      PA1
 #pragma config CPENFILT =      OFF
 #pragma config RTCIN0_ALTEN =      PA3
 #pragma config RTCOUT_ALTEN =      PA4
-#pragma config PMULOCK =      OFF
-#pragma config PGLOCK =      OFF
-#pragma config PMDLOCK =      OFF
-#pragma config IOLOCK =      UNLOCKED
-#pragma config CFGLOCK =      NVR_NOT_LOCKED
 #pragma config VBCMODE =      DIRECT
 #pragma config SMBUSEN0 =      OFF
 #pragma config SMBUSEN1 =      OFF
@@ -89,7 +83,6 @@
 
 
 /*** DEVCFG1 ***/
-#pragma config DEBUG =      3
 #pragma config ICESEL =      PGC1_PGD1
 #pragma config TRCEN =      ON
 #pragma config ZBTWKSYS =      OFF
@@ -112,7 +105,6 @@
 #pragma config WDTPSS =      PSS1048576
 #pragma config QSPIDDRM =      OFF
 #pragma config CLKZBREF =      OFF
-#pragma config FMPDAEN =      OFF
 
 /*** DEVCFG2 ***/
 #pragma config ACMP_CYCLE =      _32US
@@ -177,7 +169,7 @@ const DRV_USART_PLIB_INTERFACE drvUsart0PlibAPI = {
     .read = (DRV_USART_PLIB_READ)SERCOM1_USART_Read,
     .readIsBusy = (DRV_USART_PLIB_READ_IS_BUSY)SERCOM1_USART_ReadIsBusy,
     .readCountGet = (DRV_USART_PLIB_READ_COUNT_GET)SERCOM1_USART_ReadCountGet,
-	.readAbort = (DRV_USART_PLIB_READ_ABORT)SERCOM1_USART_ReadAbort,
+    .readAbort = (DRV_USART_PLIB_READ_ABORT)SERCOM1_USART_ReadAbort,
     .writeCallbackRegister = (DRV_USART_PLIB_WRITE_CALLBACK_REG)SERCOM1_USART_WriteCallbackRegister,
     .write = (DRV_USART_PLIB_WRITE)SERCOM1_USART_Write,
     .writeIsBusy = (DRV_USART_PLIB_WRITE_IS_BUSY)SERCOM1_USART_WriteIsBusy,
@@ -201,10 +193,6 @@ const DRV_USART_INIT drvUsart0InitData =
     /* USART Client Objects Pool */
     .clientObjPool = (uintptr_t)&drvUSART0ClientObjPool[0],
 
-    .dmaChannelTransmit = SYS_DMA_CHANNEL_NONE,
-
-    .dmaChannelReceive = SYS_DMA_CHANNEL_NONE,
-
 
     .remapDataWidth = drvUsart0remapDataWidth,
 
@@ -213,6 +201,8 @@ const DRV_USART_INIT drvUsart0InitData =
     .remapStopBits = drvUsart0remapStopBits,
 
     .remapError = drvUsart0remapError,
+
+    .dataWidth = DRV_USART_DATA_8_BIT,
 };
 
 // </editor-fold>
@@ -261,6 +251,7 @@ SYSTEM_OBJECTS sysObj;
 
 void SYS_Initialize ( void* data )
 {
+
   
     CLK_Initialize();
     /* Configure Prefetch, Wait States */
@@ -272,11 +263,9 @@ void SYS_Initialize ( void* data )
 
     SERCOM1_USART_Initialize();
 
-	BSP_Initialize();
     EVSYS_Initialize();
 
-    NVM_Initialize();
-
+	BSP_Initialize();
 
     sysObj.drvUsart0 = DRV_USART_Initialize(DRV_USART_INDEX_0, (SYS_MODULE_INIT *)&drvUsart0InitData);
 

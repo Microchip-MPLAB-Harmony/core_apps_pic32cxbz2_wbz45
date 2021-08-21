@@ -132,7 +132,7 @@ typedef struct
 
     /* Keep track of the number of clients
      * that have opened this driver
-	 */
+     */
     size_t nClients;
 
     /* Maximum number of clients */
@@ -146,18 +146,6 @@ typedef struct
 
     /* Memory pool for Client Objects */
     uintptr_t clientObjPool;
-
-    /* TX DMA Channel */
-    SYS_DMA_CHANNEL txDMAChannel;
-
-    /* RX DMA Channel */
-    SYS_DMA_CHANNEL rxDMAChannel;
-
-    /* This is the USART transmit register address. Used for DMA operation. */
-    void* txAddress;
-
-    /* This is the USART receive register address. Used for DMA operation. */
-    void* rxAddress;
 
     /* This is an instance specific token counter used to generate unique
      * client handles
@@ -198,6 +186,8 @@ typedef struct
     const uint32_t* remapStopBits;
 
     const uint32_t* remapError;
+
+    DRV_USART_DATA_BIT dataWidth;
 
 } DRV_USART_OBJ;
 

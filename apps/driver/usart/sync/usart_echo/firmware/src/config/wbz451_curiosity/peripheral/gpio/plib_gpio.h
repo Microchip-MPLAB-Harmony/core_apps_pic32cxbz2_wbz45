@@ -86,6 +86,14 @@ typedef enum
     GPIO_PORT_B = GPIOB_BASE_ADDRESS,
 } GPIO_PORT;
 
+typedef enum
+{
+    GPIO_INTERRUPT_ON_MISMATCH,
+    GPIO_INTERRUPT_ON_RISING_EDGE,
+    GPIO_INTERRUPT_ON_FALLING_EDGE,
+    GPIO_INTERRUPT_ON_BOTH_EDGES,
+}GPIO_INTERRUPT_STYLE;
+
 // *****************************************************************************
 /* GPIO Port Pins
 
@@ -174,7 +182,7 @@ void GPIO_PortOutputEnable(GPIO_PORT port, uint32_t mask);
 
 static inline void GPIO_PinWrite(GPIO_PIN pin, bool value)
 {
-    GPIO_PortWrite((GPIO_PORT)(GPIOA_BASE_ADDRESS + (0x100 * ((GPIO_PORT)(GPIOA_BASE_ADDRESS + (0x100 * (pin>>4)))))), (uint32_t)(0x1) << (pin & 0xF), (uint32_t)(value) << (pin & 0xF));
+    GPIO_PortWrite((GPIO_PORT)(GPIOA_BASE_ADDRESS + (0x100 * (pin>>4))), (uint32_t)(0x1) << (pin & 0xF), (uint32_t)(value) << (pin & 0xF));
 }
 
 static inline bool GPIO_PinRead(GPIO_PIN pin)
