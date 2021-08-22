@@ -102,7 +102,7 @@ void CLK_Initialize( void )
         clk_ready_tries++;
     } while(BTZB_XTAL_NOT_READY && (clk_ready_tries < CLK_READY_RETRIES));
     
-    if((clk_ready_tries >= CLK_READY_RETRIES) && !BTZB_XTAL_NOT_READY)
+    if((clk_ready_tries >= CLK_READY_RETRIES) && BTZB_XTAL_NOT_READY)
     {
         BTZBSYS_REGS->BTZBSYS_SUBSYS_CNTRL_REG1 |=(BTZBSYS_SUBSYS_CNTRL_REG1_subsys_bypass_xtal_ready_Msk);
         while(BTZB_XTAL_NOT_READY);
@@ -118,7 +118,7 @@ void CLK_Initialize( void )
         clk_ready_tries++;
     } while(BTZB_PLL_NOT_LOCKED && (clk_ready_tries < CLK_READY_RETRIES));
     
-    if((clk_ready_tries >= CLK_READY_RETRIES) && !BTZB_PLL_NOT_LOCKED)
+    if((clk_ready_tries >= CLK_READY_RETRIES) && BTZB_PLL_NOT_LOCKED)
     {
         BTZBSYS_REGS->BTZBSYS_SUBSYS_CNTRL_REG1 |= BTZBSYS_SUBSYS_CNTRL_REG1_subsys_bypass_pll_lock_Msk;
         while(BTZB_PLL_NOT_LOCKED);
@@ -178,15 +178,13 @@ void CLK_Initialize( void )
     CFG_REGS->CFG_CFGPCLKGEN2 = 0x0;
     CFG_REGS->CFG_CFGPCLKGEN3 = 0x9000000;
 
-
     /* Peripheral Module Disable Configuration */
-    CFG_REGS->CFG_CFGCON0CLR = CFG_CFGCON0_PMDLOCK_Msk;
+
 
     CFG_REGS->CFG_PMD1 = 0x200101cf;
     CFG_REGS->CFG_PMD2 = 0xf3000000;
     CFG_REGS->CFG_PMD3 = 0x7efe;
 
-    CFG_REGS->CFG_CFGCON0SET = CFG_CFGCON0_PMDLOCK_Msk;
 
     /* Lock system since done with clock configuration */
     CFG_REGS->CFG_SYSKEY = 0x33333333;

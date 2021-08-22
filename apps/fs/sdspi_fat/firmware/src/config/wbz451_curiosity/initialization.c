@@ -105,7 +105,6 @@
 #pragma config WDTPSS =      PSS1048576
 #pragma config QSPIDDRM =      OFF
 #pragma config CLKZBREF =      OFF
-#pragma config FMPDAEN =      OFF
 
 /*** DEVCFG2 ***/
 #pragma config ACMP_CYCLE =      _32US
@@ -181,7 +180,7 @@ const DRV_SDSPI_PLIB_INTERFACE drvSDSPI0PlibAPI = {
     .read = (DRV_SDSPI_PLIB_READ)SERCOM0_SPI_Read,
 
     /* SPI PLIB Transfer Status function */
-    .isBusy = (DRV_SDSPI_PLIB_IS_BUSY)SERCOM0_SPI_IsBusy,
+    .isTransmitterBusy = (DRV_SPI_PLIB_TRANSMITTER_IS_BUSY)SERCOM0_SPI_IsTransmitterBusy,
 
     .transferSetup = (DRV_SDSPI_PLIB_SETUP)SERCOM0_SPI_TransferSetup,
 
@@ -228,11 +227,6 @@ const DRV_SDSPI_INIT drvSDSPI0InitData =
 
     .isFsEnabled            = true,
 
-    /* DMA Channel for Transmit */
-    .txDMAChannel           = SYS_DMA_CHANNEL_NONE,
-
-    /* DMA Channel for Receive */
-    .rxDMAChannel           = SYS_DMA_CHANNEL_NONE,
 };
 
 // </editor-fold>
@@ -299,13 +293,15 @@ const SYS_FS_FUNCTIONS FatFsFunctions =
 };
 
 
+
 const SYS_FS_REGISTRATION_TABLE sysFSInit [ SYS_FS_MAX_FILE_SYSTEM_TYPE ] =
 {
     {
         .nativeFileSystemType = FAT,
         .nativeFileSystemFunctions = &FatFsFunctions
-    }
+    },
 };
+
 
 // </editor-fold>
 
@@ -360,11 +356,12 @@ void SYS_Initialize ( void* data )
 {
 
   
+    CLK_Initialize();
     /* Configure Prefetch, Wait States */
     PCHE_REGS->PCHE_CHECON = (PCHE_REGS->PCHE_CHECON & (~(PCHE_CHECON_PFMWS_Msk | PCHE_CHECON_ADRWS_Msk | PCHE_CHECON_PREFEN_Msk))) 
                                     | (PCHE_CHECON_PFMWS(1) | PCHE_CHECON_PREFEN(1));
 
-    CLK_Initialize();
+
 	GPIO_Initialize();
 
     EVSYS_Initialize();
@@ -372,8 +369,6 @@ void SYS_Initialize ( void* data )
     SERCOM0_SPI_Initialize();
 
     TC0_TimerInitialize();
-
-    NVM_Initialize();
 
 	BSP_Initialize();
 

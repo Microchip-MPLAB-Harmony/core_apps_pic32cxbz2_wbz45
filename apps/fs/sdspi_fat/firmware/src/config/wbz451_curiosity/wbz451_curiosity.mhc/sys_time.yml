@@ -4,6 +4,15 @@ attributes: {id: sys_time}
 children:
 - type: Symbols
   children:
+  - type: Combo
+    attributes: {id: SYS_TIME_OPERATING_MODE}
+    children:
+    - type: Attributes
+      children:
+      - type: Boolean
+        attributes: {id: visible}
+        children:
+        - {type: Value, value: 'true'}
   - type: String
     attributes: {id: SYS_TIME_PLIB}
     children:
@@ -34,4 +43,4 @@ children:
         children:
         - {type: Value, value: TC0_TMR}
 - type: ElementPosition
-  attributes: {x: '139', y: '378', id: sys_time}
+  attributes: {x: '330', y: '60', id: sys_time}
