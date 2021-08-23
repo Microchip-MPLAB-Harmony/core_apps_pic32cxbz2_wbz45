@@ -62,25 +62,20 @@ uint8_t portNumCb[2 + 1] = { 0, 0, 1, };
 */
 void GPIO_Initialize ( void )
 {
+ 
     /* Disable JTAG since at least one of its pins is configured for Non-JTAG function */
     CFG_REGS->CFG_CFGCON0CLR = CFG_CFGCON0_JTAGEN_Msk;
 
-          /* PORTA Initialization */
+    /* PORTA Initialization */
     /* PORTB Initialization */
     GPIOB_REGS->GPIO_LAT = 0x0; /* Initial Latch Value */
-    GPIOB_REGS->GPIO_TRISCLR = 0x29; /* Direction Control */
-    GPIOB_REGS->GPIO_ANSELCLR = 0x39; /* Digital Mode Enable */
+    GPIOB_REGS->GPIO_TRISCLR = 0xa9; /* Direction Control */
+    GPIOB_REGS->GPIO_ANSELCLR = 0xb9; /* Digital Mode Enable */
     GPIOB_REGS->GPIO_CNPUSET = 0x10; /* Pull-Up Enable */
     /* Change Notice Enable */
     GPIOB_REGS->GPIO_CNCONSET = GPIO_CNCON_ON_Msk;
     GPIOB_REGS->GPIO_PORT;
 
-    /* Unlock system for PPS configuration */
-    CFG_REGS->CFG_SYSKEY = 0x00000000;
-    CFG_REGS->CFG_SYSKEY = 0xAA996655;
-    CFG_REGS->CFG_SYSKEY = 0x556699AA;
-
-    CFG_REGS->CFG_CFGCON0CLR = CFG_CFGCON0_IOLOCK_Msk;
 
     /* PPS Input Remapping */
     PPS_REGS->PPS_SCOM1P1R = 1;
@@ -88,9 +83,6 @@ void GPIO_Initialize ( void )
     /* PPS Output Remapping */
     PPS_REGS->PPS_RPA5G1R = 4;
 
-    /* Lock back the system after PPS configuration */
-    CFG_REGS->CFG_CFGCON0SET = CFG_CFGCON0_IOLOCK_Msk;
-    CFG_REGS->CFG_SYSKEY = 0x00000000;
 
     uint32_t i;
     /* Initialize Interrupt Pin data structures */
@@ -276,6 +268,66 @@ void GPIO_PortInterruptDisable(GPIO_PORT port, uint32_t mask)
 // *****************************************************************************
 // *****************************************************************************
 
+// *****************************************************************************
+/* Function:
+    void GPIO_PinIntEnable(GPIO_PIN pin, GPIO_INTERRUPT_STYLE style)
+
+  Summary:
+    Enables IO interrupt of particular style on selected IO pins of a port.
+
+  Remarks:
+    See plib_gpio.h for more details.
+*/
+void GPIO_PinIntEnable(GPIO_PIN pin, GPIO_INTERRUPT_STYLE style)
+{
+    GPIO_PORT port;
+    uint32_t mask;
+
+    port = (GPIO_PORT)(GPIOA_BASE_ADDRESS + (0x100 * (pin>>4)));
+    mask =  0x1 << (pin & 0xF);
+
+    if (style == GPIO_INTERRUPT_ON_MISMATCH)
+    {
+        ((gpio_registers_t*)port)->GPIO_CNENSET = mask;
+    }
+    else if (style == GPIO_INTERRUPT_ON_RISING_EDGE)
+    {
+        ((gpio_registers_t*)port)->GPIO_CNENSET = mask;
+        ((gpio_registers_t*)port)->GPIO_CNNECLR = mask;
+    }
+    else if (style == GPIO_INTERRUPT_ON_FALLING_EDGE)
+    {
+        ((gpio_registers_t*)port)->GPIO_CNENCLR = mask;
+        ((gpio_registers_t*)port)->GPIO_CNNESET = mask;
+    }
+    else if (style == GPIO_INTERRUPT_ON_BOTH_EDGES)
+    {
+        ((gpio_registers_t*)port)->GPIO_CNENSET = mask;
+        ((gpio_registers_t*)port)->GPIO_CNNESET = mask;
+    }
+}
+
+// *****************************************************************************
+/* Function:
+    void GPIO_PinIntDisable(GPIO_PIN pin)
+
+  Summary:
+    Disables IO interrupt on selected IO pins of a port.
+
+  Remarks:
+    See plib_gpio.h for more details.
+*/
+void GPIO_PinIntDisable(GPIO_PIN pin)
+{
+    GPIO_PORT port;
+    uint32_t mask;
+    
+    port = (GPIO_PORT)(GPIOA_BASE_ADDRESS + (0x100 * (pin>>4)));
+    mask =  0x1 << (pin & 0xF);
+
+    ((gpio_registers_t*)port)->GPIO_CNENCLR = mask;
+    ((gpio_registers_t*)port)->GPIO_CNNECLR = mask;
+}
 // *****************************************************************************
 /* Function:
     bool GPIO_PinInterruptCallbackRegister(

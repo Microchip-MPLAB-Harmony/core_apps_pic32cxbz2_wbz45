@@ -86,6 +86,7 @@ extern void xPortPendSVHandler         ( void ) __attribute__((weak, alias("Dumm
 extern void RTC_Handler                ( void ) __attribute__((weak, alias("Dummy_Handler")));
 extern void EIC_Handler                ( void ) __attribute__((weak, alias("Dummy_Handler")));
 extern void FREQM_Handler              ( void ) __attribute__((weak, alias("Dummy_Handler")));
+extern void FLASH_CONTROL_Handler      ( void ) __attribute__((weak, alias("Dummy_Handler")));
 extern void CHANGE_NOTICE_A_Handler    ( void ) __attribute__((weak, alias("Dummy_Handler")));
 extern void DMAC_0_3_Handler           ( void ) __attribute__((weak, alias("Dummy_Handler")));
 extern void DMAC_4_15_Handler          ( void ) __attribute__((weak, alias("Dummy_Handler")));
@@ -146,7 +147,7 @@ const H3DeviceVectors exception_table=
     .pfnRTC_Handler                = RTC_Handler,
     .pfnEIC_Handler                = EIC_Handler,
     .pfnFREQM_Handler              = FREQM_Handler,
-    .pfnFLASH_CONTROL_Handler      = NVM_InterruptHandler,
+    .pfnFLASH_CONTROL_Handler      = FLASH_CONTROL_Handler,
     .pfnCHANGE_NOTICE_A_Handler    = CHANGE_NOTICE_A_Handler,
     .pfnCHANGE_NOTICE_B_Handler    = CHANGE_NOTICE_B_InterruptHandler,
     .pfnDMAC_0_3_Handler           = DMAC_0_3_Handler,

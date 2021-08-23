@@ -37,6 +37,8 @@ extern "C" {
 #define LED_OFF()           RGB_LED_GREEN_Off()
 #define LED_TOGGLE()        RGB_LED_GREEN_Toggle()
 
+#define SWITCH_PIN          GPIO_PIN_RB4
+    
 //DOM-IGNORE-BEGIN
 #ifdef __cplusplus
 }

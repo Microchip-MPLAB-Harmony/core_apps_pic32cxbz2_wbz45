@@ -80,6 +80,10 @@
 #define USER_LED_Get() ((GPIOB_REGS->GPIO_PORT >> 7) & 0x1)
 #define USER_LED_On() (GPIOB_REGS->GPIO_LATSET = (1<<7))
 #define USER_LED_Off() (GPIOB_REGS->GPIO_LATCLR = (1<<7))
+/*** SWITCH Macros for SWITCH ***/
+#define SWITCH_Get() ((GPIOB_REGS->GPIO_PORT >> 4) & 0x1)
+#define SWITCH_STATE_PRESSED 0
+#define SWITCH_STATE_RELEASED 1
 
 
 

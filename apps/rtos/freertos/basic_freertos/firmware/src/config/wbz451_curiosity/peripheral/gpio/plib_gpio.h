@@ -61,16 +61,6 @@
 // *****************************************************************************
 // *****************************************************************************
 
-/*** Macros for SWITCH pin ***/
-#define SWITCH_Set()               (GPIOB_REGS->GPIO_LATSET = (1<<4))
-#define SWITCH_Clear()             (GPIOB_REGS->GPIO_LATCLR = (1<<4))
-#define SWITCH_Toggle()            (GPIOB_REGS->GPIO_LATINV= (1<<4))
-#define SWITCH_Get()               ((GPIOB_REGS->GPIO_PORT >> 4) & 0x1)
-#define SWITCH_OutputEnable()      (GPIOB_REGS->GPIO_TRISCLR = (1<<4))
-#define SWITCH_InputEnable()       (GPIOB_REGS->GPIO_TRISSET = (1<<4))
-#define SWITCH_InterruptEnable()   (GPIOB_REGS->GPIO_CNENSET = (1<<4))
-#define SWITCH_InterruptDisable()  (GPIOB_REGS->GPIO_CNENCLR = (1<<4))
-#define SWITCH_PIN                  GPIO_PIN_RB4
 
 
 // *****************************************************************************
@@ -95,6 +85,14 @@ typedef enum
     GPIO_PORT_A = GPIOA_BASE_ADDRESS,
     GPIO_PORT_B = GPIOB_BASE_ADDRESS,
 } GPIO_PORT;
+
+typedef enum
+{
+    GPIO_INTERRUPT_ON_MISMATCH,
+    GPIO_INTERRUPT_ON_RISING_EDGE,
+    GPIO_INTERRUPT_ON_FALLING_EDGE,
+    GPIO_INTERRUPT_ON_BOTH_EDGES,
+}GPIO_INTERRUPT_STYLE;
 
 // *****************************************************************************
 /* GPIO Port Pins
@@ -246,15 +244,11 @@ static inline void GPIO_PinOutputEnable(GPIO_PIN pin)
     GPIO_PortOutputEnable((GPIO_PORT)(GPIOA_BASE_ADDRESS + (0x100 * (pin>>4))), 0x1 << (pin & 0xF));
 }
 
-static inline void GPIO_PinInterruptEnable(GPIO_PIN pin)
-{
-    GPIO_PortInterruptEnable((GPIO_PORT)(GPIOA_BASE_ADDRESS + (0x100 * (pin>>4))), 0x1 << (pin & 0xF));
-}
+#define GPIO_PinInterruptEnable(pin)       GPIO_PinIntEnable(pin, GPIO_INTERRUPT_ON_MISMATCH)
+#define GPIO_PinInterruptDisable(pin)      GPIO_PinIntDisable(pin)
 
-static inline void GPIO_PinInterruptDisable(GPIO_PIN pin)
-{
-    GPIO_PortInterruptDisable((GPIO_PORT)(GPIOA_BASE_ADDRESS + (0x100 * (pin>>4))), 0x1 << (pin & 0xF));
-}
+void GPIO_PinIntEnable(GPIO_PIN pin, GPIO_INTERRUPT_STYLE style);
+void GPIO_PinIntDisable(GPIO_PIN pin);
 
 bool GPIO_PinInterruptCallbackRegister(
     GPIO_PIN pin,
