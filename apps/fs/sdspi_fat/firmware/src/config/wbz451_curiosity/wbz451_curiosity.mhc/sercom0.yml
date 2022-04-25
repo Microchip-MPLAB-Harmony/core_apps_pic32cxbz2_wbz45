@@ -178,6 +178,10 @@ children:
         attributes: {id: visible}
         children:
         - {type: Value, value: 'true'}
+    - type: Values
+      children:
+      - type: User
+        attributes: {value: '2'}
   - type: KeyValueSet
     attributes: {id: SPI_DOPO}
     children:
@@ -350,6 +354,15 @@ children:
       children:
       - type: Dynamic
         attributes: {id: sercom0, value: '0'}
+  - type: Boolean
+    attributes: {id: USART_SFDE}
+    children:
+    - type: Attributes
+      children:
+      - type: Boolean
+        attributes: {id: visible}
+        children:
+        - {type: Value, value: 'false'}
   - type: KeyValueSet
     attributes: {id: USART_STOP_BIT}
     children:
@@ -411,4 +424,4 @@ children:
         children:
         - {type: Value, value: 'false'}
 - type: ElementPosition
-  attributes: {x: '0', y: '280', id: sercom0}
+  attributes: {x: '0', y: '285', id: sercom0}

@@ -193,6 +193,24 @@ children:
       children:
       - type: Dynamic
         attributes: {id: core, value: HS}
+  - type: Menu
+    attributes: {id: CoreIARMenu}
+    children:
+    - type: Attributes
+      children:
+      - type: Boolean
+        attributes: {id: visible}
+        children:
+        - {type: Value, value: 'false'}
+  - type: Menu
+    attributes: {id: CoreKEILMenu}
+    children:
+    - type: Attributes
+      children:
+      - type: Boolean
+        attributes: {id: visible}
+        children:
+        - {type: Value, value: 'false'}
   - type: KeyValueSet
     attributes: {id: DEVICE_TCM_SIZE}
     children:
@@ -214,6 +232,34 @@ children:
       children:
       - type: Dynamic
         attributes: {id: core, value: 'false'}
+  - type: Boolean
+    attributes: {id: DMA_CH_NEEDED_FOR_SERCOM1_Receive}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: 'false'}
+  - type: Boolean
+    attributes: {id: DMA_CH_NEEDED_FOR_SERCOM1_Transmit}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: 'false'}
+  - type: Integer
+    attributes: {id: DSWDT_CLOCK_FREQUENCY}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '32000'}
+  - type: String
+    attributes: {id: DSWDT_TIMEOUT_PERIOD}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: 16.0 ms}
   - type: Boolean
     attributes: {id: GCLK_ID_22_CHEN}
     children:
@@ -263,6 +309,13 @@ children:
       children:
       - type: Dynamic
         attributes: {id: core, value: '0x1200'}
+  - type: Integer
+    attributes: {id: LPCLK_FREQ}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '32000'}
   - type: Boolean
     attributes: {id: NVIC_12_0_ENABLE}
     children:
@@ -285,6 +338,27 @@ children:
       - type: Dynamic
         attributes: {id: core, value: 'true'}
   - type: Boolean
+    attributes: {id: NVIC_13_0_ENABLE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: 'false'}
+  - type: String
+    attributes: {id: NVIC_13_0_HANDLER}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: SERCOM1_Handler}
+  - type: Boolean
+    attributes: {id: NVIC_13_0_HANDLER_LOCK}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: 'false'}
+  - type: Boolean
     attributes: {id: NVIC_19_0_ENABLE}
     children:
     - type: Values
@@ -305,6 +379,20 @@ children:
       children:
       - type: Dynamic
         attributes: {id: core, value: 'true'}
+  - type: Combo
+    attributes: {id: OSCCON_NOSC_VALUE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: SPLL}
+  - type: Hex
+    attributes: {id: OSCCON_VALUE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '256'}
   - type: Hex
     attributes: {id: PMD3_REG_VALUE}
     children:
@@ -312,6 +400,20 @@ children:
       children:
       - type: Dynamic
         attributes: {id: core, value: '32510'}
+  - type: Integer
+    attributes: {id: POSC_OUT_FREQ}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '16000000'}
+  - type: Integer
+    attributes: {id: RTC_CLOCK_FREQUENCY}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '32000'}
   - type: Boolean
     attributes: {id: SERCOM0_CORE_CLOCK_ENABLE}
     children:
@@ -354,6 +456,48 @@ children:
       children:
       - type: Dynamic
         attributes: {id: sercom0, value: 'true'}
+  - type: Integer
+    attributes: {id: SERCOM1_CORE_CLOCK_FREQUENCY}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '0'}
+  - type: Boolean
+    attributes: {id: SERCOM1_INTERRUPT_ENABLE_UPDATE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: 'true'}
+  - type: Integer
+    attributes: {id: SERCOM_SLOW_CLOCK_FREQUENCY}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '32000'}
+  - type: Integer
+    attributes: {id: SPLL1_FREQ}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '64000000'}
+  - type: Integer
+    attributes: {id: SPLL2_FREQ}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '0'}
+  - type: Integer
+    attributes: {id: SPLL3_RFPLL_FREQ}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '96000000'}
   - type: Hex
     attributes: {id: SYS_PORT_A_TRIS}
     children:
@@ -620,7 +764,7 @@ children:
             attributes: {description: QSPI_DATA2 (out), value: '25', key: QSPI_DATA2
                 (out)}
           - type: Pair
-            attributes: {description: SERCOM1_PAD0 (out), value: '6', key: SERCOM1_PAD0
+            attributes: {description: SERCOM1_PAD0 (out), value: '4', key: SERCOM1_PAD0
                 (out)}
           - type: Pair
             attributes: {description: SERCOM3_PAD3 (out), value: '9', key: SERCOM3_PAD3
@@ -750,7 +894,7 @@ children:
           - type: Pair
             attributes: {description: TC3_WO0 (out), value: '22', key: TC3_WO0 (out)}
           - type: Pair
-            attributes: {description: SERCOM1_PAD1 (out), value: '5', key: SERCOM1_PAD1
+            attributes: {description: SERCOM1_PAD1 (out), value: '4', key: SERCOM1_PAD1
                 (out)}
           - type: Pair
             attributes: {description: TC2_WO1 (out), value: '21', key: TC2_WO1 (out)}
