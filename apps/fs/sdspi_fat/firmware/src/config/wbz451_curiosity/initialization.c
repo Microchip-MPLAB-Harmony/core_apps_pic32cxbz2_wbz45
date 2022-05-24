@@ -358,8 +358,9 @@ void SYS_Initialize ( void* data )
   
     CLK_Initialize();
     /* Configure Prefetch, Wait States */
-    PCHE_REGS->PCHE_CHECON = (PCHE_REGS->PCHE_CHECON & (~(PCHE_CHECON_PFMWS_Msk | PCHE_CHECON_ADRWS_Msk | PCHE_CHECON_PREFEN_Msk))) 
+    PCHE_REGS->PCHE_CHECON = (PCHE_REGS->PCHE_CHECON & (~(PCHE_CHECON_PFMWS_Msk | PCHE_CHECON_ADRWS_Msk | PCHE_CHECON_PREFEN_Msk)))
                                     | (PCHE_CHECON_PFMWS(1) | PCHE_CHECON_PREFEN(1));
+
 
 
 	GPIO_Initialize();
@@ -368,9 +369,9 @@ void SYS_Initialize ( void* data )
 
     SERCOM0_SPI_Initialize();
 
+	BSP_Initialize();
     TC0_TimerInitialize();
 
-	BSP_Initialize();
 
     /* Initialize SDSPI0 Driver Instance */
     sysObj.drvSDSPI0 = DRV_SDSPI_Initialize(DRV_SDSPI_INDEX_0, (SYS_MODULE_INIT *)&drvSDSPI0InitData);
