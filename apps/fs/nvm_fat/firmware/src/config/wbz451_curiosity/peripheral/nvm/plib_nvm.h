@@ -63,27 +63,27 @@
 // DOM-IGNORE-END
 
 #define NVM_FLASH_START_ADDRESS    (0x01000000U)
+#ifndef NVM_FLASH_SIZE
 #define NVM_FLASH_SIZE             (0x100000U)
+#endif
 #define NVM_FLASH_ROWSIZE          (1024U)
 #define NVM_FLASH_PAGESIZE         (4096U)
+
+
+/* No error */
+#define    NVM_ERROR_NONE      ( 0x0U )
+
+/* NVM write error */
+#define    NVM_ERROR_WRITE     ( NVM_NVMCON_WRERR_Msk )
+
+/* NVM Low Voltage Detect error */
+#define    NVM_ERROR_LOWVOLTAGE ( NVM_NVMCON_LVDERR_Msk )
+
+typedef uint32_t NVM_ERROR;
 
 #define NVM_START_ADDRESS              0x1080000
 #define NVM_MEDIA_SIZE                 512
 #define NVM_ERASE_BUFFER_SIZE          4096
-
-typedef enum
-{
-    /* No error */
-    NVM_ERROR_NONE = 0x0,
-
-    /* NVM write error */
-    NVM_ERROR_WRITE = NVM_NVMCON_WRERR_Msk,
-
-    /* NVM Low Voltage Detect error */
-    NVM_ERROR_LOWVOLTAGE = NVM_NVMCON_LVDERR_Msk,
-
-} NVM_ERROR;
-
 
 
 typedef void (*NVM_CALLBACK)(uintptr_t context);
@@ -107,6 +107,10 @@ bool NVM_IsBusy( void );
 void NVM_ProgramFlashWriteProtect( uint32_t laddress, uint32_t haddress);
 
 void NVM_ProgramFlashWriteProtectLock( void );
+
+void NVM_BootFlashWriteProtectUnlock( uint32_t bootFlashPagesMsk );
+
+void NVM_BootFlashWriteProtectLock( uint32_t bootFlashPagesMsk );
 
 void NVM_CallbackRegister( NVM_CALLBACK callback, uintptr_t context );
 
