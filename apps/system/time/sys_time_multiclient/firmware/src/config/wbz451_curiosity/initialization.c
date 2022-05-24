@@ -141,7 +141,6 @@
 #pragma config DSWDTEN =      OFF
 #pragma config DSEN =    OFF
 #pragma config UVREGROVR =      CONTROLLED
-#pragma config LPOSCEN =      OFF
 #pragma config RTCNTM_CSEL =      RAW
 
 /*** FBCFG0 ***/
@@ -150,6 +149,7 @@
 
 /*** FCPN0 ***/
 #pragma config CP =      DISABLED
+
 
 
 
@@ -260,9 +260,9 @@ void SYS_Initialize ( void* data )
 
     EVSYS_Initialize();
 
+	BSP_Initialize();
     TC0_TimerInitialize();
 
-	BSP_Initialize();
 
 
     sysObj.sysTime = SYS_TIME_Initialize(SYS_TIME_INDEX_0, (SYS_MODULE_INIT *)&sysTimeInitData);
