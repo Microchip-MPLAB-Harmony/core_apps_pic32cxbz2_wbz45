@@ -141,7 +141,6 @@
 #pragma config DSWDTEN =      OFF
 #pragma config DSEN =    OFF
 #pragma config UVREGROVR =      CONTROLLED
-#pragma config LPOSCEN =      OFF
 #pragma config RTCNTM_CSEL =      RAW
 
 /*** FBCFG0 ***/
@@ -150,6 +149,7 @@
 
 /*** FCPN0 ***/
 #pragma config CP =      DISABLED
+
 
 
 

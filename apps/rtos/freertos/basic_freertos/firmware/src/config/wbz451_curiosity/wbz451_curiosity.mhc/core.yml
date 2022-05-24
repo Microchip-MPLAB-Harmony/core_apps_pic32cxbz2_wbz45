@@ -400,6 +400,20 @@ children:
       children:
       - type: Dynamic
         attributes: {id: core, value: 'true'}
+  - type: Combo
+    attributes: {id: OSCCON_NOSC_VALUE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: SPLL}
+  - type: Hex
+    attributes: {id: OSCCON_VALUE}
+    children:
+    - type: Values
+      children:
+      - type: Dynamic
+        attributes: {id: core, value: '256'}
   - type: Hex
     attributes: {id: PMD3_REG_VALUE}
     children:

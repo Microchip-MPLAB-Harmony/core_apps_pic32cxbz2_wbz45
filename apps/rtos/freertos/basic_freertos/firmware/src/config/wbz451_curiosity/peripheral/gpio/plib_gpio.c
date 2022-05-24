@@ -66,29 +66,29 @@ void GPIO_Initialize ( void )
     /* Disable JTAG since at least one of its pins is configured for Non-JTAG function */
     CFG_REGS->CFG_CFGCON0CLR = CFG_CFGCON0_JTAGEN_Msk;
 
-    /* PORTA Initialization */
+          /* PORTA Initialization */
     /* PORTB Initialization */
-    GPIOB_REGS->GPIO_LAT = 0x0; /* Initial Latch Value */
-    GPIOB_REGS->GPIO_TRISCLR = 0xa9; /* Direction Control */
-    GPIOB_REGS->GPIO_ANSELCLR = 0xb9; /* Digital Mode Enable */
-    GPIOB_REGS->GPIO_CNPUSET = 0x10; /* Pull-Up Enable */
+    GPIOB_REGS->GPIO_LAT = 0x0U; /* Initial Latch Value */
+    GPIOB_REGS->GPIO_TRISCLR = 0xa9U; /* Direction Control */
+    GPIOB_REGS->GPIO_ANSELCLR = 0xb9U; /* Digital Mode Enable */
+    GPIOB_REGS->GPIO_CNPUSET = 0x10U; /* Pull-Up Enable */
     /* Change Notice Enable */
     GPIOB_REGS->GPIO_CNCONSET = GPIO_CNCON_ON_Msk;
     GPIOB_REGS->GPIO_PORT;
 
 
     /* PPS Input Remapping */
-    PPS_REGS->PPS_SCOM1P1R = 1;
+    PPS_REGS->PPS_SCOM1P1R = 1U;
 
     /* PPS Output Remapping */
-    PPS_REGS->PPS_RPA5G1R = 4;
+    PPS_REGS->PPS_RPA5G1R = 4U;
 
 
     uint32_t i;
     /* Initialize Interrupt Pin data structures */
     portPinCbObj[0 + 0].pin = GPIO_PIN_RB4;
     
-    for(i=0; i<1; i++)
+    for(i=0U; i<1; i++)
     {
         portPinCbObj[i].callback = NULL;
     }
