@@ -1,0 +1,81 @@
+{
+	"metaDataVersion": "1.0.0",
+	"category": "com.microchip.ide.project",
+	"content": {
+		"metaDataVersion": "1.1.0",
+		"name": "com.microchip.mcu32.mplabx.project.core_apps_pic32cxbz2_wbz45_driver_usart_sync_usart_echo_wbz451_curiosity",
+		"version": "3.0.0",
+		"displayName": "USART driver synchronous - UART echo Example for PIC32CX-BZ2 Family",
+		"projectName": "usart_echo_wbz451_curiosity",
+		"shortDescription": "This example echoes the received characters over the console using the USART driver in synchronous mode.",
+		"ide": {
+			"name": "MPLABX",
+			"semverRange": ">=6.00.0"
+		},
+		"compiler": [
+			{
+				"name": "XC32",
+				"semverRange": ">=4.1.0"
+			}
+		],
+		"dfp": {
+			"name": "PIC32CX-BZ_DFP",
+			"semverRange": "^1.0.107"
+		},
+		"configurator": {
+			"name": "MHC",
+			"semverRange": ">=3.8.0"
+		},
+		"device": {
+			"metaDataVersion": "1.0.0",
+			"category": "com.microchip.portal.contentRef",
+			"content": {
+				"metaDataVersion": "1.0.0",
+				"category": "com.microchip.device",
+				"name": "WBZ451",
+				"versionRange": "*"
+			}
+		},
+		"author": "Microchip",
+		"subcategories": [
+			[
+				"Development Kit",
+				"PIC32CX WBZ451 Curiosity Board"
+			],
+			[
+				"Harmony",
+				"Drivers",
+				"USART"
+			],
+			[
+				"Peripherals",
+				"USART"
+			]
+		],
+		"peripherals": [
+			"USART"
+		],
+		"keywords": [
+			"MHC",
+			"Harmony",
+			"WBZ451",
+			"PIC32CX-BZ2 Family",
+			"UART",
+			"Serial Communication",
+			"USART",
+			"SERCOM",
+			"FLEXCOM"
+		],
+		"additionalData": {
+			"longDescription": {
+				"metaDataVersion": "1.0.0",
+				"category": "com.microchip.portal.fileRef",
+				"content": {
+					"metaDataVersion": "1.0.0",
+					"fileName": "./../../readme.md",
+					"mimeType": "text/markdown"
+				}
+			}
+		}
+	}
+}
