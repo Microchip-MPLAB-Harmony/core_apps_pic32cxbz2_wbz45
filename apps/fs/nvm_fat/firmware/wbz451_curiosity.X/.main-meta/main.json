@@ -4,13 +4,13 @@
 	"content": {
 		"metaDataVersion": "1.1.0",
 		"name": "com.microchip.mcu32.mplabx.project.core_apps_pic32cxbz2_wbz45_fs_nvm_fat_wbz451_curiosity",
-		"version": "3.0.0",
+		"version": "3.2.0",
 		"displayName": "FAT filesystem using NVM driver Example for PIC32CX-BZ2 Family",
 		"projectName": "nvm_fat_wbz451_curiosity",
 		"shortDescription": "This application shows an example of implementing a FAT disk in the device internal Flash memory.",
 		"ide": {
 			"name": "MPLABX",
-			"semverRange": ">=6.00.0"
+			"semverRange": ">=6.0.0"
 		},
 		"compiler": [
 			{
@@ -24,7 +24,7 @@
 		},
 		"configurator": {
 			"name": "MHC",
-			"semverRange": ">=3.8.0"
+			"semverRange": ">=3.8.5"
 		},
 		"device": {
 			"metaDataVersion": "1.0.0",

@@ -3,40 +3,27 @@
 
 # Microchip MPLAB® Harmony 3 Release Notes
 
-## Harmony 3 driver and system service application examples for PIC32CX BZ24/BZ25 family  v3.0.1
+## Harmony 3 driver and system service application examples for PIC32CX-BZ2 and WBZ451 family  v3.0.0
 
-### New Features
-- Added discover.microchip.com metadata
+### Development kit and demo application support
 
-### Bug fixes
-- Same as v3.0.0
+Following table provides number of peripheral library examples available for different development kits.
 
-### Known Issues
-- Same as v3.0.0
-
-### Development Tools
-- Same as v3.0.0
-
-## Harmony 3 core library application examples for PIC32CX BZ24/BZ25 family v3.0.0
+| Development Kits  | MPLAB X applications |
+|:-----------------:|:-------------------:|
+| [PIC32CX WBZ451 Curiosity Board](https://www.microchip.com/en-us/development-tool/EA71C53A) | 9 |
 
 ### New Features
 
-- **Development kit and demo application support** - The following table provides number of peripheral library application available for different development kits
-
-    | Development Kits                                                                                                                               | Number of applications |
-    | ---                                                                                                                                            | --- |
-    | [SAM D21 Xplained Pro Evaluation Kit](https://www.microchip.com/DevelopmentTools/ProductDetails.aspx?PartNO=ATSAMD21-XPRO)                     | 8 |
+- None
 
 ### Known Issues
 
-The current known issues are as follows:
-
-- <fill me>
+- None
 
 ### Development Tools
 
-- [MPLAB® X IDE v5.40](https://www.microchip.com/mplab/mplab-x-ide)
-- [MPLAB® XC32 C/C++ Compiler v2.40](https://www.microchip.com/mplab/compilers)
-- [IAR Embedded Workbench® for ARM® (v8.32 or above)](https://www.iar.com/iar-embedded-workbench/#!?architecture=Arm)
+- [MPLAB® X IDE v6.00](https://www.microchip.com/mplab/mplab-x-ide)
 - MPLAB® X IDE plug-ins:
-  - MPLAB® Harmony Configurator (MHC) v3.3.0.0 and above.
+  - MPLAB® Code Configurator (MCC) v5.1.9
+- [MPLAB® XC32 C/C++ Compiler v4.10](https://www.microchip.com/mplab/compilers)
