@@ -42,13 +42,14 @@
 //DOM-IGNORE-END
 
 #include "plib_gpio.h"
+#include "interrupts.h"
 
 
 /* Array to store callback objects of each configured interrupt */
-GPIO_PIN_CALLBACK_OBJ portPinCbObj[1];
+volatile static GPIO_PIN_CALLBACK_OBJ portPinCbObj[1];
 
 /* Array to store number of interrupts in each PORT Channel + previous interrupt count */
-uint8_t portNumCb[2 + 1] = { 0, 0, 1, };
+static uint8_t portNumCb[2 + 1] = { 0, 0, 1, };
 
 /******************************************************************************
   Function:
@@ -88,7 +89,7 @@ void GPIO_Initialize ( void )
     /* Initialize Interrupt Pin data structures */
     portPinCbObj[0 + 0].pin = GPIO_PIN_RB4;
     
-    for(i=0U; i<1; i++)
+    for(i=0U; i<1U; i++)
     {
         portPinCbObj[i].callback = NULL;
     }
@@ -283,8 +284,8 @@ void GPIO_PinIntEnable(GPIO_PIN pin, GPIO_INTERRUPT_STYLE style)
     GPIO_PORT port;
     uint32_t mask;
 
-    port = (GPIO_PORT)(GPIOA_BASE_ADDRESS + (0x100 * (pin>>4)));
-    mask =  0x1 << (pin & 0xF);
+    port = (GPIO_PORT)(GPIOA_BASE_ADDRESS + (0x100U * (pin>>4)));
+    mask =  0x1UL << (pin & 0xFU);
 
     if (style == GPIO_INTERRUPT_ON_MISMATCH)
     {
@@ -305,6 +306,10 @@ void GPIO_PinIntEnable(GPIO_PIN pin, GPIO_INTERRUPT_STYLE style)
         ((gpio_registers_t*)port)->GPIO_CNENSET = mask;
         ((gpio_registers_t*)port)->GPIO_CNNESET = mask;
     }
+    else
+    {
+        /* Nothing to do */
+    }
 }
 
 // *****************************************************************************
@@ -321,9 +326,9 @@ void GPIO_PinIntDisable(GPIO_PIN pin)
 {
     GPIO_PORT port;
     uint32_t mask;
-    
-    port = (GPIO_PORT)(GPIOA_BASE_ADDRESS + (0x100 * (pin>>4)));
-    mask =  0x1 << (pin & 0xF);
+
+    port = (GPIO_PORT)(GPIOA_BASE_ADDRESS + (0x100U * (pin>>4)));
+    mask =  0x1UL << (pin & 0xFU);
 
     ((gpio_registers_t*)port)->GPIO_CNENCLR = mask;
     ((gpio_registers_t*)port)->GPIO_CNNECLR = mask;
@@ -351,9 +356,9 @@ bool GPIO_PinInterruptCallbackRegister(
     uint8_t i;
     uint8_t portIndex;
 
-    portIndex = pin >> 4;
+    portIndex = (uint8_t)(pin >> 4);
 
-    for(i = portNumCb[portIndex]; i < portNumCb[portIndex +1]; i++)
+    for(i = portNumCb[portIndex]; i < portNumCb[portIndex +1U]; i++)
     {
         if (portPinCbObj[i].pin == pin)
         {
@@ -380,12 +385,14 @@ bool GPIO_PinInterruptCallbackRegister(
     Interrupt Handler for change notice interrupt for channel B.
 
   Remarks:
-	It is an internal function called from ISR, user should not call it directly.
+    It is an internal function called from ISR, user should not call it directly.
 */
-void CHANGE_NOTICE_B_InterruptHandler(void)
+void __attribute__((used)) CHANGE_NOTICE_B_InterruptHandler(void)
 {
     uint8_t i;
     uint32_t status;
+    GPIO_PIN pin;
+    uintptr_t context;
 
     status  = GPIOB_REGS->GPIO_CNSTAT;
     status &= GPIOB_REGS->GPIO_CNEN;
@@ -393,11 +400,15 @@ void CHANGE_NOTICE_B_InterruptHandler(void)
     GPIOB_REGS->GPIO_PORT;
 
     /* Check pending events and call callback if registered */
-    for(i = 0; i < 1; i++)
+    for(i = 0; i < 1U; i++)
     {
-        if((status & (1 << (portPinCbObj[i].pin & 0xF))) && (portPinCbObj[i].callback != NULL))
+        pin = portPinCbObj[i].pin;
+
+        if((portPinCbObj[i].callback != NULL) && ((status & (1UL << (pin & 0xFU))) != 0U))
         {
-            portPinCbObj[i].callback (portPinCbObj[i].pin, portPinCbObj[i].context);
+            context = portPinCbObj[i].context;
+
+            portPinCbObj[i].callback (pin, context);
         }
     }
 }

@@ -56,7 +56,7 @@
 // ****************************************************************************
 
 /*** FUSERID ***/
-#pragma config USER_ID =      0xffff
+#pragma config USER_ID =      0xffffU
 
 /*** DEVCFG0 ***/
 #pragma config TDOEN =      ON
@@ -126,7 +126,7 @@
 
 
 /*** DEVCFG4 ***/
-#pragma config SOSCCFG =    0x0
+#pragma config SOSCCFG =    0x0U
 #pragma config RTCEVENT_SEL =      ONE_SEC
 #pragma config RTCEVENT_EN =      OFF
 #pragma config VBKP_1KCSEL =      _32K
@@ -145,7 +145,7 @@
 
 /*** FBCFG0 ***/
 #pragma config BINFOVALID =      VALID
-#pragma config PCSCMODE =      SINGLE
+#pragma config PCSCMODE =      DUAL
 
 /*** FCPN0 ***/
 #pragma config CP =      DISABLED
@@ -159,6 +159,11 @@
 // Section: Driver Initialization Data
 // *****************************************************************************
 // *****************************************************************************
+/* Following MISRA-C rules are deviated in the below code block */
+/* MISRA C-2012 Rule 11.1 */
+/* MISRA C-2012 Rule 11.3 */
+/* MISRA C-2012 Rule 11.8 */
+
 
 
 // *****************************************************************************
@@ -188,7 +193,7 @@
 // *****************************************************************************
 // *****************************************************************************
 
-
+/* MISRAC 2012 deviation block end */
 
 /*******************************************************************************
   Function:
@@ -202,12 +207,15 @@
 
 void SYS_Initialize ( void* data )
 {
+    /* MISRAC 2012 deviation block start */
+    /* MISRA C-2012 Rule 2.2 deviated in this file.  Deviation record ID -  H3_MISRAC_2012_R_2_2_DR_1 */
 
   
     CLK_Initialize();
     /* Configure Prefetch, Wait States */
-    PCHE_REGS->PCHE_CHECON = (PCHE_REGS->PCHE_CHECON & (~(PCHE_CHECON_PFMWS_Msk | PCHE_CHECON_ADRWS_Msk | PCHE_CHECON_PREFEN_Msk))) 
+    PCHE_REGS->PCHE_CHECON = (PCHE_REGS->PCHE_CHECON & (~(PCHE_CHECON_PFMWS_Msk | PCHE_CHECON_ADRWS_Msk | PCHE_CHECON_PREFEN_Msk)))
                                     | (PCHE_CHECON_PFMWS(1) | PCHE_CHECON_PREFEN(1));
+
 
 
 	GPIO_Initialize();
@@ -219,8 +227,15 @@ void SYS_Initialize ( void* data )
 	BSP_Initialize();
 
 
+    /* MISRAC 2012 deviation block start */
+    /* Following MISRA-C rules deviated in this block  */
+    /* MISRA C-2012 Rule 11.3 - Deviation record ID - H3_MISRAC_2012_R_11_3_DR_1 */
+    /* MISRA C-2012 Rule 11.8 - Deviation record ID - H3_MISRAC_2012_R_11_8_DR_1 */
 
 
+
+
+    /* MISRAC 2012 deviation block end */
     TASK1_Initialize();
     TASK2_Initialize();
     TASK3_Initialize();
@@ -228,6 +243,9 @@ void SYS_Initialize ( void* data )
 
 
     NVIC_Initialize();
+
+
+    /* MISRAC 2012 deviation block end */
 
 }
 
