@@ -1,32 +1,25 @@
-/*******************************************************************************
-  SYS CLK Static Functions for Clock System Service
+/******************************************************************************
+  MEMORY Driver File System Interface Implementation
 
   Company:
     Microchip Technology Inc.
 
   File Name:
-    plib_clk.h
+    drv_memory_file_system.h
 
   Summary:
-    SYS CLK static function interface for the Clock System Service.
+    MEMORY Driver Interface Definition
 
   Description:
-    The Clock System Service provides a simple interface to manage the
-    oscillators on Microchip microcontrollers. This file defines the static
-    implementation for the Clock System Service.
-
-  Remarks:
-    Static functions incorporate all system clock configuration settings as
-    determined by the user via the Microchip Harmony Configurator GUI.
-    It provides static version of the routines, eliminating the need for an
-    object ID or object handle.
-
-    Static single-open interfaces also eliminate the need for the open handle.
-
+    The MEMORY Driver provides a interface to access the MEMORY on the PIC32
+    microcontroller. This file implements the MEMORY Driver file system interface.
+    This file should be included in the project if MEMORY driver functionality with
+    File system is needed.
 *******************************************************************************/
 
+//DOM-IGNORE-BEGIN
 /*******************************************************************************
-* Copyright (C) 2019 Microchip Technology Inc. and its subsidiaries.
+* Copyright (C) 2018 Microchip Technology Inc. and its subsidiaries.
 *
 * Subject to your compliance with these terms, you may use Microchip software
 * and any derivatives exclusively with Microchip products. It is your
@@ -47,71 +40,42 @@
 * ANY WAY RELATED TO THIS SOFTWARE WILL NOT EXCEED THE AMOUNT OF FEES, IF ANY,
 * THAT YOU HAVE PAID DIRECTLY TO MICROCHIP FOR THIS SOFTWARE.
 *******************************************************************************/
-
-#ifndef PLIB_CLK_H
-#define PLIB_CLK_H
+//DOM-IGNORE-END
+#ifndef DRV_MEMORY_FILE_SYSTEM_H
+#define DRV_MEMORY_FILE_SYSTEM_H
 
 // *****************************************************************************
 // *****************************************************************************
-// Section: Included Files
-// *****************************************************************************
-// *****************************************************************************
-
-#include <stddef.h>
-#include <stdbool.h>  
-
-// DOM-IGNORE-BEGIN
-#ifdef __cplusplus // Provide C++ Compatibility
-
-	extern "C" {
-
-#endif
-// DOM-IGNORE-END
- 
-// *****************************************************************************
-// *****************************************************************************
-// Section: CLK Module System Interface Routines
+// Section: Include Files
 // *****************************************************************************
 // *****************************************************************************
 
-// *****************************************************************************
-/* Function:
-    void CLK_Initialize( void )
-
-  Summary:
-    Initializes hardware of the System Clock and Peripheral Clock.
-    
-  Description:
-    This function initializes the hardware of System Clock and Peripheral Clocks.
-
-  Precondition:
-    None.
-
-  Parameters:
-    None.
-
-  Returns:
-    None.
-
-  Example:
-    <code>
-    CLK_Initialize ( );
-
-    </code>
-
-  Remarks:
-    None.
-*/
-
-void CLK_Initialize( void );
+#include "driver/memory/src/drv_memory_local.h"
+#include "system/fs/sys_fs_media_manager.h"
 
 // DOM-IGNORE-BEGIN
 #ifdef __cplusplus  // Provide C++ Compatibility
-
-    }
-
+    extern "C" {
 #endif
 // DOM-IGNORE-END
 
-#endif //PLIB_CLK_H
+// *****************************************************************************
+// *****************************************************************************
+// Section: Global objects
+// *****************************************************************************
+// *****************************************************************************
 
+
+// *****************************************************************************
+// *****************************************************************************
+// Section: MEMORY Driver File system interface Routines
+// *****************************************************************************
+// *****************************************************************************
+
+void DRV_MEMORY_RegisterWithSysFs( const SYS_MODULE_INDEX drvIndex, uint8_t mediaType);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif //#ifndef DRV_MEMORY_FILE_SYSTEM_H
