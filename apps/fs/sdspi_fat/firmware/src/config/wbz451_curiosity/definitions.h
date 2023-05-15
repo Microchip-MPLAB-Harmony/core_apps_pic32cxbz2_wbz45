@@ -60,8 +60,8 @@
 #include "peripheral/gpio/plib_gpio.h"
 #include "peripheral/nvic/plib_nvic.h"
 #include "peripheral/cmcc/plib_cmcc.h"
-#include "bsp/bsp.h"
 #include "peripheral/tc/plib_tc0.h"
+#include "bsp/bsp.h"
 #include "driver/sdspi/drv_sdspi.h"
 #include "system/time/sys_time.h"
 #include "system/int/sys_int.h"
@@ -81,6 +81,12 @@ extern "C" {
 
 #endif
 // DOM-IGNORE-END
+
+/* Device Information */
+#define DEVICE_NAME			 "WBZ451"
+#define DEVICE_ARCH			 "CORTEX-M4"
+#define DEVICE_FAMILY		 "PIC32CX_BZ2"
+#define DEVICE_SERIES		 "BZ45"
 
 /* CPU clock frequency */
 #define CPU_CLOCK_FREQUENCY 64000000
