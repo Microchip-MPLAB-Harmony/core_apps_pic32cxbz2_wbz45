@@ -4,18 +4,18 @@
 	"content": {
 		"metaDataVersion": "1.1.0",
 		"name": "com.microchip.mcu32.mplabx.project.core_apps_pic32cxbz2_wbz45_rtos_freertos_basic_freertos_wbz451_curiosity",
-		"version": "3.2.0",
+		"version": "3.1.0",
 		"displayName": "FreeRTOS basic Example for PIC32CX-BZ2 Family",
 		"projectName": "basic_freertos_wbz451_curiosity",
 		"shortDescription": "This example application demonstrates context switching between four tasks of different priorites. Two tasks run periodically while the other two tasks are event driven.",
 		"ide": {
 			"name": "MPLABX",
-			"semverRange": ">=6.0.0"
+			"semverRange": ">=6.5.0"
 		},
 		"compiler": [
 			{
 				"name": "XC32",
-				"semverRange": ">=4.1.0"
+				"semverRange": ">=4.21.0"
 			}
 		],
 		"dfp": {
@@ -23,8 +23,8 @@
 			"semverRange": "^1.0.107"
 		},
 		"configurator": {
-			"name": "MHC",
-			"semverRange": ">=3.8.5"
+			"name": "MCC",
+			"semverRange": ">=5.3.0"
 		},
 		"device": {
 			"metaDataVersion": "1.0.0",
