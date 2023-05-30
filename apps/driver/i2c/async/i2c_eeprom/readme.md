@@ -1,6 +1,6 @@
 ---
 parent: Harmony 3 driver and system service application examples for PIC32CX-BZ2 and WBZ451 family
-title: SPI Driver asynchronous - Self loopback multi client
+title: I2C driver asynchronous - I2C EEPROM
 has_children: false
 has_toc: false
 ---
