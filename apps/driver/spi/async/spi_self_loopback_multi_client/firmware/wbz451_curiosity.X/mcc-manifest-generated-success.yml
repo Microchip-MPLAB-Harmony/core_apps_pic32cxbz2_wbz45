@@ -2,8 +2,8 @@
 
 manifest_file_version: 1.0.0
 project: spi_self_loopback_multi_client_wbz451_curiosity
-creation_date: 2025-09-23T10:29:18.065+00:00[UTC]
-operating_system: Windows 10
+creation_date: 2025-11-25T11:01:43.825+00:00[UTC]
+operating_system: Windows 11
 mcc_mode: IDE
 mcc_mode_version: v6.25
 device_name: WBZ451

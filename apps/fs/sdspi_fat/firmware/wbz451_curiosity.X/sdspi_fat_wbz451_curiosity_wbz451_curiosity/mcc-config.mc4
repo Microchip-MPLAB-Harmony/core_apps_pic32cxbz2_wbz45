@@ -31,7 +31,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\wbz451_curiosity\configuration.h
   hash: b0c3080c0787382df6a1c7f837c2032f2e7db6157a9f2c237bf0e2943e874340
 - file: ..\src\config\wbz451_curiosity\definitions.h
-  hash: ff6b9f40bc8f7565c0f795ace7b4b564e3e7d99c53e718db7f5033eb75f043f7
+  hash: b9e0396d520d8fafaa87213c0c841947dcd7d5b6004b91dbe3f2808a47a76e32
 - file: ..\src\config\wbz451_curiosity\device.h
   hash: 18c259b5ec85d672983e87e53cfdc06ed2f22be3dec27c3b38b3db838508f3fa
 - file: ..\src\config\wbz451_curiosity\device_cache.h
@@ -61,7 +61,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\wbz451_curiosity\exceptions.c
   hash: a565e8d25d218b3e1069267ae9cc317161d062683a27c64e3cb454757bb82fd9
 - file: ..\src\config\wbz451_curiosity\initialization.c
-  hash: d76141bae6316bb9fb81322a9977b3b81d1c34f8ecc21ef5f0304efd93bb1915
+  hash: 859c258c82abd1275c353f337e4c07f946066d7ca28cb1f5dcee1c976db1e60c
 - file: ..\src\config\wbz451_curiosity\interrupts.c
   hash: 47f5968980cb3e8e382d0ae4e3a3259738fa6dccdf089f17e614da5e2264f362
 - file: ..\src\config\wbz451_curiosity\interrupts.h

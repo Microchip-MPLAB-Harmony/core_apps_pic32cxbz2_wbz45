@@ -190,24 +190,23 @@
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
                    projectFiles="true">
-      <logicalFolder name="usart_echo_wbz451_curiosity_wbz451_curiosity"
-                     displayName="usart_echo_wbz451_curiosity_wbz451_curiosity"
+      <logicalFolder name="usart_echo_async_wbz451_curiosity_wbz451_curiosity"
+                     displayName="usart_echo_async_wbz451_curiosity_wbz451_curiosity"
                      projectFiles="true">
         <logicalFolder name="components" displayName="components" projectFiles="true">
-          <itemPath>usart_echo_wbz451_curiosity_wbz451_curiosity/components/BSP_WBZ451_Curiosity.yml</itemPath>
-          <itemPath>usart_echo_wbz451_curiosity_wbz451_curiosity/components/HarmonyCore.yml</itemPath>
-          <itemPath>usart_echo_wbz451_curiosity_wbz451_curiosity/components/cmsis.yml</itemPath>
-          <itemPath>usart_echo_wbz451_curiosity_wbz451_curiosity/components/core.yml</itemPath>
-          <itemPath>usart_echo_wbz451_curiosity_wbz451_curiosity/components/dfp.yml</itemPath>
-          <itemPath>usart_echo_wbz451_curiosity_wbz451_curiosity/components/drv_usart.yml</itemPath>
-          <itemPath>usart_echo_wbz451_curiosity_wbz451_curiosity/components/drv_usart_0.yml</itemPath>
-          <itemPath>usart_echo_wbz451_curiosity_wbz451_curiosity/components/evsys.yml</itemPath>
-          <itemPath>usart_echo_wbz451_curiosity_wbz451_curiosity/components/sercom1.yml</itemPath>
+          <itemPath>usart_echo_async_wbz451_curiosity_wbz451_curiosity/components/BSP_WBZ451_Curiosity.yml</itemPath>
+          <itemPath>usart_echo_async_wbz451_curiosity_wbz451_curiosity/components/HarmonyCore.yml</itemPath>
+          <itemPath>usart_echo_async_wbz451_curiosity_wbz451_curiosity/components/cmsis.yml</itemPath>
+          <itemPath>usart_echo_async_wbz451_curiosity_wbz451_curiosity/components/core.yml</itemPath>
+          <itemPath>usart_echo_async_wbz451_curiosity_wbz451_curiosity/components/dfp.yml</itemPath>
+          <itemPath>usart_echo_async_wbz451_curiosity_wbz451_curiosity/components/drv_usart.yml</itemPath>
+          <itemPath>usart_echo_async_wbz451_curiosity_wbz451_curiosity/components/drv_usart_0.yml</itemPath>
+          <itemPath>usart_echo_async_wbz451_curiosity_wbz451_curiosity/components/evsys.yml</itemPath>
+          <itemPath>usart_echo_async_wbz451_curiosity_wbz451_curiosity/components/sercom1.yml</itemPath>
         </logicalFolder>
-        <itemPath>usart_echo_wbz451_curiosity_wbz451_curiosity/mcc-config.mc4</itemPath>
+        <itemPath>usart_echo_async_wbz451_curiosity_wbz451_curiosity/mcc-config.mc4</itemPath>
       </logicalFolder>
       <itemPath>Makefile</itemPath>
-      <itemPath>../src/config/wbz451_curiosity/harmony-manifest-success.yml</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -295,7 +294,7 @@
       </toolsSet>
       <packs>
         <pack name="PIC32CX-BZ_DFP" vendor="Microchip" version="1.4.243"/>
-        <pack name="CMSIS" vendor="ARM" version="5.4.0"/>
+        <pack name="CMSIS" vendor="ARM" version="5.9.0"/>
       </packs>
       <ScriptingSettings>
       </ScriptingSettings>
@@ -410,7 +409,7 @@
         <property key="no-startup-files" value="false"/>
         <property key="oXC32ld-extra-opts" value=""/>
         <property key="optimization-level" value=""/>
-        <property key="preprocessor-macros" value=""/>
+        <property key="preprocessor-macros" value="VECTOR_REGION=boot_rom"/>
         <property key="remove-unused-sections" value="true"/>
         <property key="report-memory-usage" value="false"/>
         <property key="serial-length" value=""/>

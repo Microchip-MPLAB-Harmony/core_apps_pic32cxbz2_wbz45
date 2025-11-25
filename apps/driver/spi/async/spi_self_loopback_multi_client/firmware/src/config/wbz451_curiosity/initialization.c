@@ -290,9 +290,9 @@ void SYS_Initialize ( void* data )
 
 	GPIO_Initialize();
 
-    EVSYS_Initialize();
-
     SERCOM0_SPI_Initialize();
+
+    EVSYS_Initialize();
 
 	BSP_Initialize();
 

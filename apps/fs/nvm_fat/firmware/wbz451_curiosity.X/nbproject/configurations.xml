@@ -15,6 +15,7 @@
               <itemPath>../src/config/wbz451_curiosity/driver/memory/drv_memory_definitions.h</itemPath>
               <itemPath>../src/config/wbz451_curiosity/driver/memory/drv_memory_nvm.h</itemPath>
               <itemPath>../src/config/wbz451_curiosity/driver/memory/src/drv_memory_local.h</itemPath>
+              <itemPath>../src/config/wbz451_curiosity/driver/memory/src/drv_memory_file_system.h</itemPath>
             </logicalFolder>
             <itemPath>../src/config/wbz451_curiosity/driver/driver.h</itemPath>
             <itemPath>../src/config/wbz451_curiosity/driver/driver_common.h</itemPath>
@@ -224,7 +225,6 @@
         <itemPath>nvm_fat_wbz451_curiosity_wbz451_curiosity/mcc-config.mc4</itemPath>
       </logicalFolder>
       <itemPath>Makefile</itemPath>
-      <itemPath>../src/config/wbz451_curiosity/harmony-manifest-success.yml</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -325,7 +325,7 @@
         <platform>3</platform>
       </toolsSet>
       <packs>
-        <pack name="CMSIS" vendor="ARM" version="5.4.0"/>
+        <pack name="CMSIS" vendor="ARM" version="5.9.0"/>
         <pack name="PIC32CX-BZ_DFP" vendor="Microchip" version="1.4.243"/>
       </packs>
       <ScriptingSettings>
@@ -441,7 +441,7 @@
         <property key="no-startup-files" value="false"/>
         <property key="oXC32ld-extra-opts" value=""/>
         <property key="optimization-level" value=""/>
-        <property key="preprocessor-macros" value=""/>
+        <property key="preprocessor-macros" value="VECTOR_REGION=boot_rom"/>
         <property key="remove-unused-sections" value="true"/>
         <property key="report-memory-usage" value="false"/>
         <property key="serial-length" value=""/>

@@ -29,7 +29,7 @@ generatedFileHashHistoryMap:
 - file: ..\src\config\wbz451_curiosity\configuration.h
   hash: 1260c965501272a1edc7d9d107afbdb9e4d4a19a0a46206c4d927c2a1328c47b
 - file: ..\src\config\wbz451_curiosity\definitions.h
-  hash: e12f38773f147152402ae02647429665d0794734542e4e2247a5d444003b8e3d
+  hash: e6ca35e55947d1dc82925ed03398582a29a942c36ac7d9fce268c3af1c8641b2
 - file: ..\src\config\wbz451_curiosity\device.h
   hash: 18c259b5ec85d672983e87e53cfdc06ed2f22be3dec27c3b38b3db838508f3fa
 - file: ..\src\config\wbz451_curiosity\device_cache.h

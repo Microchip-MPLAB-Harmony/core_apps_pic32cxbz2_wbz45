@@ -2,8 +2,8 @@
 
 manifest_file_version: 1.0.0
 project: i2c_eeprom_wbz451_curiosity
-creation_date: 2025-09-23T10:29:38.036+00:00[UTC]
-operating_system: Windows 10
+creation_date: 2025-11-25T11:02:13.478+00:00[UTC]
+operating_system: Windows 11
 mcc_mode: IDE
 mcc_mode_version: v6.25
 device_name: WBZ451
